@@ -6,7 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public class App extends Frame implements WindowListener{
+public class App extends Frame implements WindowListener {
 
 	public App() {
 		this.setSize(500, 500);
