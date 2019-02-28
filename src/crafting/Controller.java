@@ -1,10 +1,10 @@
 package crafting;
 
-public class Controler {
+public class Controller {
 
 	private Item inhand;
 	
-	public Controler() {
+	public Controller() {
 		
 	}
 }
