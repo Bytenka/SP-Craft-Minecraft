@@ -1,6 +1,8 @@
 package crafting;
 
 import java.awt.Color;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -9,12 +11,13 @@ import javax.swing.JPanel;
 public class View extends JFrame {
 	public static final int DEFAULT_WIDTH = 800;
 	public static final int DEFAULT_HEIGHT = 500;
-	
+
 	private InnerPanel panel;
 
 	public View(Model model) {
 		panel = new InnerPanel(model);
 
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setIconImage(new ImageIcon(Model.APP_ICON).getImage());
 		this.setTitle("Crafting bench");
 		this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -38,5 +41,4 @@ public class View extends JFrame {
 			this.add(model.inventory);
 		}
 	}
-
 }
