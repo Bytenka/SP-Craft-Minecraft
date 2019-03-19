@@ -22,7 +22,6 @@ public class View extends JFrame {
 		this.setTitle("Crafting bench");
 		this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		this.getContentPane().setBackground(Color.pink); // Flashy color, just for bug hunting
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE); // Default -> just to be explicit here
 
 		this.add(panel);
 

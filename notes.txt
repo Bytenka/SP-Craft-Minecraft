@@ -1,3 +1,11 @@
 Choices:
     - We're using Swing to draw stuff on the screen. It is more powerful (and modern) than AWT in the sense it is really easy to implement double-buffering. We could have also gone with JavaFX but the compatibility with the Eclipse version at the university wasn't guaranteed (Java 11)
     - Not using AbstractButton for Slots, would be overkill
+
+Utilisation de JSON pour définir les crafts possibles.
+
+[
+    ["", "", ""],                     [ ][ ][ ]
+    ["", "", ""],                     [ ][ ][ ]
+    ["", "", ""]                      [ ][ ][ ]
+]
