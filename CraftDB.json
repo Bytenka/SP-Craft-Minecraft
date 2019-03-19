@@ -1,0 +1,22 @@
+{
+	"13": {
+		"arrow": [
+			["flint"], 
+			["stick"], 
+			["feather"]
+		]
+	},
+	
+	"33": {
+		"bow": [
+			["string", "stick", ""],
+			["string", "", "stick"],
+			["string", "stick", ""]
+		],
+		"diamond_chestplate": [
+			["diamond", "", "diamond"],
+			["diamond", "diamond", "diamond"],
+			["diamond", "diamond", "diamond"]
+		]
+	}
+}
