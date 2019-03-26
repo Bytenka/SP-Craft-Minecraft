@@ -16,8 +16,8 @@ public class Slot extends JComponent implements MouseListener {
 	public class SlotObserver extends Observable {
 		private MouseEvent m_mouseEvent;
 		private SlotEvent m_event;
-		
-		public SlotObserver () {
+
+		public SlotObserver() {
 			this.reset();
 		}
 
@@ -26,11 +26,11 @@ public class Slot extends JComponent implements MouseListener {
 			m_event = event;
 			this.setChanged();
 		}
-		
+
 		public SlotEvent getEvent() {
 			return m_event;
 		}
-		
+
 		public void reset() {
 			m_mouseEvent = null;
 			m_event = SlotEvent.NONE;
@@ -83,11 +83,11 @@ public class Slot extends JComponent implements MouseListener {
 	public int getQuantity() {
 		return m_quantity;
 	}
-	
+
 	public void setIsSelected(boolean status) {
 		m_isSelected = status;
 	}
-	
+
 	public boolean getIsSelected() {
 		return m_isSelected;
 	}
@@ -97,18 +97,23 @@ public class Slot extends JComponent implements MouseListener {
 	}
 
 	public boolean putItem(Item item, int quantity) { // This method TRIES to put the item, and handles stacking
-		if (m_quantity > 0) {
-			if (m_item.equals(item)) {
-				this.addQuantity(quantity);
-				return true;
-			}
-
-			if (this.isEmpty()) {
-				this.setItem(item, quantity);
-				return true;
-			}
+		if (this.isEmpty()) {
+			this.setItem(item, quantity);
+			return true;
+			
+		} else if (m_item.equals(item)) {
+			this.addQuantity(quantity);
+			return true;
 		}
 		return false;
+	}
+
+	public static void swap(Slot slot1, Slot slot2) {
+		Item tempI = slot2.m_item;
+		int tempQ = slot2.m_quantity;
+
+		slot2.setItem(slot1.m_item, slot1.m_quantity);
+		slot1.setItem(tempI, tempQ);
 	}
 
 	@Override

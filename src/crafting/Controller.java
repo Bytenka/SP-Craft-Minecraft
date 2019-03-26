@@ -29,7 +29,20 @@ public class Controller implements Observer {
 				slot.setIsSelected(false);
 				break;
 			case MOUSE_CLICKED:
-				System.out.println("Clicked");
+				if (!m_model.playerHand.isEmpty()) {
+					if (slot.putItem(m_model.playerHand.getItem(), m_model.playerHand.getQuantity())) // Attempt stacking
+					{
+						m_model.playerHand.clear();
+					} else {
+						Slot.swap(slot, m_model.playerHand);
+						System.out.println("SWAP");
+					}
+				} else {
+					m_model.playerHand.setItem(slot.getItem(), slot.getQuantity());
+					slot.clear();
+				}
+
+				System.out.println(m_model.playerHand);
 				break;
 			default:
 				break;
@@ -43,7 +56,7 @@ public class Controller implements Observer {
 		 * slot.addQuantity(itemInHand.getQuantity()); itemInHand.clear(); } else {
 		 * Slot.swapItems(itemInHand, slot); }
 		 * 
-		System.out.println("oui");
+		 * System.out.println("oui");
 		 */
 	}
 }
