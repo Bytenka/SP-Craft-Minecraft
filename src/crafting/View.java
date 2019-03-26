@@ -38,6 +38,8 @@ public class View extends JFrame {
 			this.setLayout(null);
 			model.inventory.setLocation(50, 50);
 			this.add(model.inventory);
+			model.ctable.setLocation(50, 50);
+			this.add(model.ctable);
 		}
 	}
 }

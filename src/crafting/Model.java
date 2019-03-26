@@ -14,6 +14,7 @@ public class Model {
 
 	public Inventory inventory;
 	public ItemDB itemDB;
+	public CraftingTable ctable;
 
 	public Model() {
 		try {
@@ -25,6 +26,7 @@ public class Model {
 		}
 		itemDB = new ItemDB();
 		inventory = new Inventory(); // Initialize everything *before* panel
+		ctable = new CraftingTable();
 
 		// -------------- Filling with items
 		inventory.setSlot(0, 0, ItemDB.getItem("pumpkin_pie"), 1);
