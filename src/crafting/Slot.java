@@ -4,21 +4,33 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Observable;
 
 import javax.swing.JComponent;
 
 public class Slot extends JComponent implements MouseListener {
+	// We can't do multi inheritance in Java AND the setChanged() method is
+	// protected...
+	private class InternalObserver extends Observable {
+		public void setClicked() {
+			this.setChanged();
+		}
+	}
+
 	private static final Color HIGHLIGHTED_COLOR = new Color(255, 255, 255, 80);
 	public static int SIZE = 50;
 
 	private Item item;
 	private int quantity;
 	private boolean isSelected = false;
+	private InternalObserver internalObservable;
 
-	public Slot() {
+	public Slot(Controller ctrl) {
 		this.item = null;
 		this.quantity = 0;
 		this.addMouseListener(this);
+		this.internalObservable = new InternalObserver();
+		this.internalObservable.addObserver(ctrl);
 	}
 
 	public Item getItem() {
@@ -86,7 +98,9 @@ public class Slot extends JComponent implements MouseListener {
 
 	@Override
 	public String toString() {
-		return this.item.toString();
+		if (this.item != null)
+			return this.item.toString() + ": " + this.quantity;
+		return "none";
 	}
 
 	@Override
@@ -111,5 +125,7 @@ public class Slot extends JComponent implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
+		this.internalObservable.setClicked();
+		this.internalObservable.notifyObservers(this);
 	}
 }

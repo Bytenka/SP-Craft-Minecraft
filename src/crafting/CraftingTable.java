@@ -23,44 +23,16 @@ public class CraftingTable extends Container {
 	private BufferedImage backgroundImage;
 	
 	
-	
-	/*public CraftingTable() {
-		try {
-			backgroundImage = ImageIO.read(new File(BACKGROUND_IMAGE_PATH));
-		} catch (IOException e) {
-			System.err.println("Could not load background image: " + e.getMessage());
-			backgroundImage = null;
-		}
-		
-		// Set the size according to the slots
-		
-		this.setSize(COLS * Slot.SIZE + (COLS - 1) * GAP_SIZE, ROWS * Slot.SIZE + (ROWS - 1) * GAP_SIZE);
-		this.setLayout(new GridLayout(ROWS, COLS, GAP_SIZE, GAP_SIZE));
-				
-		// Set and fill the table
-		this.tab = new Slot[ROWS][COLS];
-		for (int r = 0; r < ROWS; r++)
-			for (int c = 0; c < COLS; c++) {
-				this.tab[r][c] = new Slot();
-				this.add("" + r + c, tab[r][c]); // Slot at (3, 2) has name "32"
-			}
-		this.res = new CraftingRes();
-		//this.res = new Slot();
-		//this.res.setLocation(200, Slot.SIZE * 4);
-		
-		//this.add(this.res);
-		
-	}
-	*/
-	public CraftingTable() {
+
+	public CraftingTable(Controller ctrl) {
 		this.setBackground(Color.pink);
 		this.setVisible(true);
 		
 		// Do not use layouts for this (for now) TODO
 		this.setLayout(null);
 		
-		this.table = new Table();
-		this.res = new CraftingRes();
+		this.table = new Table(ctrl);
+		this.res = new CraftingRes(ctrl);
 		
 		this.table.setLocation(50, 50);
 		this.add(this.table);
@@ -72,7 +44,7 @@ public class CraftingTable extends Container {
 	public class Table extends Container {
 		private Slot[][] tab;
 		
-		public Table() {
+		public Table(Controller ctrl) {
 			this.setVisible(true);
 			try {
 				backgroundImage = ImageIO.read(new File(BACKGROUND_IMAGE_PATH));
@@ -90,7 +62,7 @@ public class CraftingTable extends Container {
 			this.tab = new Slot[ROWS][COLS];
 			for (int r = 0; r < ROWS; r++)
 				for (int c = 0; c < COLS; c++) {
-					this.tab[r][c] = new Slot();
+					this.tab[r][c] = new Slot(ctrl);
 					this.add("" + r + c, tab[r][c]); // Slot at (3, 2) has name "32"
 				}
 		}
@@ -108,7 +80,7 @@ public class CraftingTable extends Container {
 	public class CraftingRes extends Container {
 		
 		private Slot res;
-		public CraftingRes() {
+		public CraftingRes(Controller ctrl) {
 			this.setVisible(true);
 			try {
 				backgroundImage = ImageIO.read(new File(BACKGROUND_IMAGE_PATH));
@@ -123,7 +95,7 @@ public class CraftingTable extends Container {
 			this.setLayout(null); //TODO
 			this.setLocation(300, 50);
 			
-			this.res = new Slot();
+			this.res = new Slot(ctrl);
 			
 		}
 		

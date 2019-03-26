@@ -18,7 +18,7 @@ public class Inventory extends Container {
 	private Slot[][] inv;
 	private BufferedImage backgroundImage;
 
-	public Inventory() {
+	public Inventory(Controller ctrl) {
 		try {
 			backgroundImage = ImageIO.read(new File(BACKGROUND_IMAGE_PATH));
 		} catch (IOException e) {
@@ -34,7 +34,7 @@ public class Inventory extends Container {
 		this.inv = new Slot[ROWS][COLS];
 		for (int r = 0; r < ROWS; r++)
 			for (int c = 0; c < COLS; c++) {
-				inv[r][c] = new Slot();
+				inv[r][c] = new Slot(ctrl);
 				this.add("" + r + c, inv[r][c]); // Slot at (3, 7) has name "37"
 			}
 	}
