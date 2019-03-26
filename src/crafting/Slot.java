@@ -60,6 +60,10 @@ public class Slot extends JComponent implements MouseListener {
 		}
 		return false;
 	}
+	
+	public void addQuantity(int quantity) {
+		this.quantity += quantity;
+	}
 
 	public void setItem(Item i, int quantity) { // This method override the item (no checks)
 		this.item = i;

@@ -33,11 +33,13 @@ public class Item {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof String)
-			return obj.equals(this.name);
+		if (obj != null) {
+			if (obj instanceof String)
+				return obj.equals(this.name);
 
-		if (obj instanceof Item)
-			return ((Item) obj).name.equals(this.name);
+			if (obj instanceof Item)
+				return ((Item) obj).name.equals(this.name);
+		}
 		return false;
 	}
 }

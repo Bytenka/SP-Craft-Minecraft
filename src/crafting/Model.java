@@ -16,24 +16,33 @@ public class Model {
 	public ItemDB itemDB;
 	public CraftingTable ctable;
 
-	public Model(Controller ctrl) {
+	private View m_view = null;
+	private Controller m_controller = null;
+
+	public Model() {
+	}
+
+	public void init(View view, Controller controller) {
+		m_view = view;
+		m_controller = controller;
+
 		try {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, new File("res/minecraft_font.ttf"));
-			FONT = font.deriveFont(Slot.SIZE/3f);
+			FONT = font.deriveFont(Slot.SIZE / 3f);
 
 		} catch (FontFormatException | IOException e) {
 			System.err.println("Could not load main font: " + e.getMessage());
 		}
+		
 		itemDB = new ItemDB();
-		inventory = new Inventory(ctrl); // Initialize everything *before* panel
-		ctable = new CraftingTable(ctrl);
-
+		inventory = new Inventory(m_controller); // Initialize everything *before* panel
+		ctable = new CraftingTable(m_controller);
 
 		// -------------- Filling with items
 		inventory.setSlot(0, 0, ItemDB.getItem("pumpkin_pie"), 1);
 		inventory.setSlot(0, 1, ItemDB.getItem("potion_bottle_drinkable"), 5);
 		inventory.setSlot(0, 2, ItemDB.getItem("fireball"), 200);
-		inventory.setSlot(0, 3, ItemDB.getItem("paper"), 2);
+		inventory.setSlot(0, 3, ItemDB.getItem("fireball"), 52);
 		inventory.setSlot(0, 4, ItemDB.getItem("arrow"), 1);
 		inventory.setSlot(0, 5, ItemDB.getItem("bread"), 1);
 		inventory.setSlot(0, 6, ItemDB.getItem("beef_raw"), 1);
@@ -41,8 +50,12 @@ public class Model {
 	}
 
 	public static void main(String[] args) {
-		Controller ctrl = new Controller();
-		Model model = new Model(ctrl);
-		new View(model);
+		Model model = new Model();
+		View view = new View();
+		Controller controller = new Controller();
+
+		model.init(view, controller);
+		view.init(model, controller);
+		controller.init(model, view);
 	}
 }
