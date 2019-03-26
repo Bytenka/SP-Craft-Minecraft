@@ -9,98 +9,129 @@ import java.util.Observable;
 import javax.swing.JComponent;
 
 public class Slot extends JComponent implements MouseListener {
-	// We can't do multi inheritance in Java AND the setChanged() method is
-	// protected...
-	private class InternalObserver extends Observable {
-		public void setClicked() {
+	public enum SlotEvent {
+		MOUSE_ENTERED, MOUSE_EXITED, MOUSE_CLICKED, NONE
+	};
+
+	public class SlotObserver extends Observable {
+		private MouseEvent m_mouseEvent;
+		private SlotEvent m_event;
+		
+		public SlotObserver () {
+			this.reset();
+		}
+
+		public void setEvent(SlotEvent event, MouseEvent mouseEvent) {
+			m_mouseEvent = mouseEvent;
+			m_event = event;
 			this.setChanged();
 		}
+		
+		public SlotEvent getEvent() {
+			return m_event;
+		}
+		
+		public void reset() {
+			m_mouseEvent = null;
+			m_event = SlotEvent.NONE;
+		}
+
 	}
 
 	private static final Color HIGHLIGHTED_COLOR = new Color(255, 255, 255, 80);
 	public static int SIZE = 50;
 
-	private Item item;
-	private int quantity;
-	private boolean isSelected = false;
-	private InternalObserver internalObservable;
+	private Item m_item;
+	private int m_quantity;
+	private boolean m_isSelected = false;
+	private SlotObserver m_internalObservable;
 
 	public Slot(Controller ctrl) {
-		this.item = null;
-		this.quantity = 0;
+		m_item = null;
+		m_quantity = 0;
 		this.addMouseListener(this);
-		this.internalObservable = new InternalObserver();
-		this.internalObservable.addObserver(ctrl);
+		m_internalObservable = new SlotObserver();
+		m_internalObservable.addObserver(ctrl);
+	}
+
+	public void setItem(Item i, int quantity) { // This method override the item (no checks)
+		m_item = i;
+		m_quantity = quantity;
 	}
 
 	public Item getItem() {
-		return this.item;
+		return m_item;
+	}
+
+	public void clear() {
+		m_item = null;
+		m_quantity = 0;
+	}
+
+	public void setQuantity(int quantity) {
+		if (quantity < 1)
+			throw new RuntimeException("Quantity cannot be < 1");
+		m_quantity = quantity;
+	}
+
+	public void addQuantity(int quantity) {
+		if (quantity < 0)
+			throw new RuntimeException("Cannot add negative quantity");
+		m_quantity += quantity;
 	}
 
 	public int getQuantity() {
-		return this.quantity;
+		return m_quantity;
+	}
+	
+	public void setIsSelected(boolean status) {
+		m_isSelected = status;
+	}
+	
+	public boolean getIsSelected() {
+		return m_isSelected;
 	}
 
 	public boolean isEmpty() {
-		return this.item == null;
+		return m_item == null;
 	}
 
-	public boolean putItem(Item i, int quantity) { // This method TRIES to put the item
-		if (this.quantity > 0) {
-			if (this.item.equals(i)) {
-				this.quantity += quantity;
+	public boolean putItem(Item item, int quantity) { // This method TRIES to put the item, and handles stacking
+		if (m_quantity > 0) {
+			if (m_item.equals(item)) {
+				this.addQuantity(quantity);
 				return true;
 			}
 
 			if (this.isEmpty()) {
-				this.item = i;
-				this.quantity = quantity;
+				this.setItem(item, quantity);
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	public void addQuantity(int quantity) {
-		this.quantity += quantity;
-	}
-
-	public void setItem(Item i, int quantity) { // This method override the item (no checks)
-		this.item = i;
-		this.quantity = quantity;
-	}
-
-	public void clear() {
-		this.item = null;
-		this.quantity = 0;
-	}
-
-	public static void swapItems(Slot item1, Slot item2) {
-		Item tempItem = item2.item;
-		int tempQuantity = item2.quantity;
-		
-		item2.setItem(item1.item, item1.quantity);
-		item1.setItem(tempItem, tempQuantity);
-	}
 
 	@Override
 	public void paint(Graphics g) {
-		if (this.item != null)
-			g.drawImage(this.item.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+		// Display the item image
+		if (m_item != null)
+			g.drawImage(m_item.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
 
-		if (this.quantity > 1) {
+		// Display the item quantity
+		if (m_quantity > 1) {
 			g.setFont(Model.FONT);
 
 			// Draw quantity with a shadow to make it readable
 			int textX = 5;
 			int textY = this.getHeight() - 5;
 			g.setColor(Color.darkGray);
-			g.drawString(String.valueOf(this.quantity), textX - 2, textY + 2);
+			g.drawString(String.valueOf(m_quantity), textX - 2, textY + 2);
 			g.setColor(Model.FONT_COLOR);
-			g.drawString(String.valueOf(this.quantity), textX, textY);
+			g.drawString(String.valueOf(m_quantity), textX, textY);
 		}
 
-		if (this.isSelected) {
+		// Visual feedback is the item is hovered
+		if (m_isSelected) {
 			g.setColor(HIGHLIGHTED_COLOR);
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		}
@@ -110,21 +141,21 @@ public class Slot extends JComponent implements MouseListener {
 
 	@Override
 	public String toString() {
-		if (this.item != null)
-			return this.item.toString() + ": " + this.quantity;
+		if (m_item != null)
+			return m_item.toString() + ": " + m_quantity;
 		return "none";
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		this.isSelected = true;
-		repaint();
+		m_internalObservable.setEvent(SlotEvent.MOUSE_ENTERED, arg0);
+		m_internalObservable.notifyObservers(this);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		this.isSelected = false;
-		repaint();
+		m_internalObservable.setEvent(SlotEvent.MOUSE_EXITED, arg0);
+		m_internalObservable.notifyObservers(this);
 	}
 
 	@Override
@@ -137,7 +168,7 @@ public class Slot extends JComponent implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		this.internalObservable.setClicked();
-		this.internalObservable.notifyObservers(this);
+		m_internalObservable.setEvent(SlotEvent.MOUSE_CLICKED, arg0);
+		m_internalObservable.notifyObservers(this);
 	}
 }

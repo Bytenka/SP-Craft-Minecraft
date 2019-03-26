@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public final class ItemDB {
-	private static HashMap<String, Item> MapItems;
+	private static HashMap<String, Item> m_items;
 
 	public ItemDB() {
-		MapItems = new HashMap<>();
+		m_items = new HashMap<>();
 
 		File dirItems = new File(Model.ITEMS_PATH);
 		File[] listeImgItems = dirItems.listFiles();
@@ -17,7 +17,7 @@ public final class ItemDB {
 		for (File file : listeImgItems) {
 			String nom = file.getName().split("\\.")[0];
 			try {
-				MapItems.put(nom, new Item(nom, file));
+				m_items.put(nom, new Item(nom, file));
 			} catch (IOException e) {
 				System.err.println("Could not load Item \"" + nom + "\": " + e.getMessage());
 				notLoaded++;
@@ -26,8 +26,12 @@ public final class ItemDB {
 		System.out.println("ItemBD: Loaded " + (listeImgItems.length - notLoaded) + " items");
 	}
 
+	public static HashMap<String, Item> getItems() {
+		return m_items;
+	}
+
 	public static Item getItem(String name) {
-		Item i = MapItems.get(name);
+		Item i = m_items.get(name);
 		if (i == null)
 			throw new RuntimeException("Item \"" + name + "\" does not exist!");
 		return i;

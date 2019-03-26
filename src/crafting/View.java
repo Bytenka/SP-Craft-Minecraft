@@ -1,6 +1,8 @@
 package crafting;
 
 import java.awt.Color;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -15,7 +17,7 @@ public class View extends JFrame {
 
 	public View() {
 	}
-	
+
 	public void init(Model model, Controller controller) {
 		m_panel = new InnerPanel();
 		m_panel.init(model, controller);
@@ -29,16 +31,18 @@ public class View extends JFrame {
 
 		this.add(m_panel);
 		this.setVisible(true);
-		
+
 	}
 
-	private class InnerPanel extends JPanel {
+	private class InnerPanel extends JPanel{
+
 		private Model m_model = null;
 		private Controller m_controller = null;
 
 		public InnerPanel() {
+			
 		}
-		
+
 		private void init(Model model, Controller controller) {
 			m_model = model;
 			m_controller = controller;

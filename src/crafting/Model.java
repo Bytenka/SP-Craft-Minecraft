@@ -15,6 +15,7 @@ public class Model {
 	public Inventory inventory;
 	public ItemDB itemDB;
 	public CraftingTable ctable;
+	public Slot playerHand;
 
 	private View m_view = null;
 	private Controller m_controller = null;
@@ -37,6 +38,7 @@ public class Model {
 		itemDB = new ItemDB();
 		inventory = new Inventory(m_controller); // Initialize everything *before* panel
 		ctable = new CraftingTable(m_controller);
+		playerHand = new Slot(m_controller);
 
 		// -------------- Filling with items
 		inventory.setSlot(0, 0, ItemDB.getItem("pumpkin_pie"), 1);
