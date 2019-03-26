@@ -13,11 +13,11 @@ public class Slot extends JComponent implements MouseListener {
 		MOUSE_ENTERED, MOUSE_EXITED, MOUSE_CLICKED, NONE
 	};
 
-	public class SlotObserver extends Observable {
+	public class SlotObservable extends Observable {
 		private MouseEvent m_mouseEvent;
 		private SlotEvent m_event;
 
-		public SlotObserver() {
+		public SlotObservable() {
 			this.reset();
 		}
 
@@ -35,53 +35,53 @@ public class Slot extends JComponent implements MouseListener {
 			m_mouseEvent = null;
 			m_event = SlotEvent.NONE;
 		}
-
 	}
 
 	private static final Color HIGHLIGHTED_COLOR = new Color(255, 255, 255, 80);
 	public static int SIZE = 50;
 
-	private Item m_item;
-	private int m_quantity;
+	protected Item item;
+	protected int quantity;
+	
 	private boolean m_isSelected = false;
-	private SlotObserver m_internalObservable;
+	private SlotObservable m_slotObservable;
 
 	public Slot(Controller ctrl) {
-		m_item = null;
-		m_quantity = 0;
+		this.item = null;
+		this.quantity = 0;
 		this.addMouseListener(this);
-		m_internalObservable = new SlotObserver();
-		m_internalObservable.addObserver(ctrl);
+		m_slotObservable = new SlotObservable();
+		m_slotObservable.addObserver(ctrl);
 	}
 
-	public void setItem(Item i, int quantity) { // This method override the item (no checks)
-		m_item = i;
-		m_quantity = quantity;
+	public void setItem(Item item, int quantity) { // This method override the item (no checks)
+		this.item = item;
+		this.quantity = quantity;
 	}
 
 	public Item getItem() {
-		return m_item;
+		return this.item;
 	}
 
 	public void clear() {
-		m_item = null;
-		m_quantity = 0;
+		this.item = null;
+		this.quantity = 0;
 	}
 
 	public void setQuantity(int quantity) {
 		if (quantity < 1)
 			throw new RuntimeException("Quantity cannot be < 1");
-		m_quantity = quantity;
+		this.quantity = quantity;
 	}
 
 	public void addQuantity(int quantity) {
 		if (quantity < 0)
 			throw new RuntimeException("Cannot add negative quantity");
-		m_quantity += quantity;
+		this.quantity += quantity;
 	}
 
 	public int getQuantity() {
-		return m_quantity;
+		return this.quantity;
 	}
 
 	public void setIsSelected(boolean status) {
@@ -93,7 +93,7 @@ public class Slot extends JComponent implements MouseListener {
 	}
 
 	public boolean isEmpty() {
-		return m_item == null;
+		return this.item == null;
 	}
 
 	public boolean putItem(Item item, int quantity) { // This method TRIES to put the item, and handles stacking
@@ -101,7 +101,7 @@ public class Slot extends JComponent implements MouseListener {
 			this.setItem(item, quantity);
 			return true;
 			
-		} else if (m_item.equals(item)) {
+		} else if (this.item.equals(item)) {
 			this.addQuantity(quantity);
 			return true;
 		}
@@ -109,30 +109,30 @@ public class Slot extends JComponent implements MouseListener {
 	}
 
 	public static void swap(Slot slot1, Slot slot2) {
-		Item tempI = slot2.m_item;
-		int tempQ = slot2.m_quantity;
+		Item tempI = slot2.item;
+		int tempQ = slot2.quantity;
 
-		slot2.setItem(slot1.m_item, slot1.m_quantity);
+		slot2.setItem(slot1.item, slot1.quantity);
 		slot1.setItem(tempI, tempQ);
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		// Display the item image
-		if (m_item != null)
-			g.drawImage(m_item.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+		if (this.item != null)
+			g.drawImage(this.item.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
 
 		// Display the item quantity
-		if (m_quantity > 1) {
+		if (this.quantity > 1) {
 			g.setFont(Model.FONT);
 
 			// Draw quantity with a shadow to make it readable
 			int textX = 5;
 			int textY = this.getHeight() - 5;
 			g.setColor(Color.darkGray);
-			g.drawString(String.valueOf(m_quantity), textX - 2, textY + 2);
+			g.drawString(String.valueOf(this.quantity), textX - 2, textY + 2);
 			g.setColor(Model.FONT_COLOR);
-			g.drawString(String.valueOf(m_quantity), textX, textY);
+			g.drawString(String.valueOf(this.quantity), textX, textY);
 		}
 
 		// Visual feedback is the item is hovered
@@ -146,21 +146,21 @@ public class Slot extends JComponent implements MouseListener {
 
 	@Override
 	public String toString() {
-		if (m_item != null)
-			return m_item.toString() + ": " + m_quantity;
+		if (this.item != null)
+			return this.item.toString() + ": " + this.quantity;
 		return "none";
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		m_internalObservable.setEvent(SlotEvent.MOUSE_ENTERED, arg0);
-		m_internalObservable.notifyObservers(this);
+		m_slotObservable.setEvent(SlotEvent.MOUSE_ENTERED, arg0);
+		m_slotObservable.notifyObservers(this);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		m_internalObservable.setEvent(SlotEvent.MOUSE_EXITED, arg0);
-		m_internalObservable.notifyObservers(this);
+		m_slotObservable.setEvent(SlotEvent.MOUSE_EXITED, arg0);
+		m_slotObservable.notifyObservers(this);
 	}
 
 	@Override
@@ -173,7 +173,7 @@ public class Slot extends JComponent implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		m_internalObservable.setEvent(SlotEvent.MOUSE_CLICKED, arg0);
-		m_internalObservable.notifyObservers(this);
+		m_slotObservable.setEvent(SlotEvent.MOUSE_CLICKED, arg0);
+		m_slotObservable.notifyObservers(this);
 	}
 }

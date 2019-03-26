@@ -1,5 +1,6 @@
 package crafting;
 
+import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,8 +18,8 @@ public class Controller implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o instanceof Slot.SlotObserver) {
-			Slot.SlotObserver observer = (Slot.SlotObserver) o;
+		if (o instanceof Slot.SlotObservable) {
+			Slot.SlotObservable observer = (Slot.SlotObservable) o;
 			Slot slot = (Slot) arg;
 
 			switch (observer.getEvent()) {
@@ -30,33 +31,27 @@ public class Controller implements Observer {
 				break;
 			case MOUSE_CLICKED:
 				if (!m_model.playerHand.isEmpty()) {
-					if (slot.putItem(m_model.playerHand.getItem(), m_model.playerHand.getQuantity())) // Attempt stacking
-					{
+					// Attempt stacking
+					if (slot.putItem(m_model.playerHand.getItem(), m_model.playerHand.getQuantity()))
 						m_model.playerHand.clear();
-					} else {
+					else
 						Slot.swap(slot, m_model.playerHand);
-						System.out.println("SWAP");
-					}
 				} else {
 					m_model.playerHand.setItem(slot.getItem(), slot.getQuantity());
 					slot.clear();
 				}
-
-				System.out.println(m_model.playerHand);
 				break;
 			default:
 				break;
 			}
-
 			observer.reset();
 			slot.repaint();
+		} else if (o instanceof View.ViewObservable){
+			MouseEvent mouseEvent = (MouseEvent)arg;
+			
+			int centerOffset = Slot.SIZE/2;
+			m_model.playerHand.setLocation(mouseEvent.getX() - centerOffset, mouseEvent.getY() - centerOffset);
+			m_model.playerHand.repaint();
 		}
-		/*
-		 * if (slot.getItem().equals(itemInHand.getItem())) {
-		 * slot.addQuantity(itemInHand.getQuantity()); itemInHand.clear(); } else {
-		 * Slot.swapItems(itemInHand, slot); }
-		 * 
-		 * System.out.println("oui");
-		 */
 	}
 }
