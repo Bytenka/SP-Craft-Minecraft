@@ -15,7 +15,7 @@ public class Model {
 	public Inventory inventory;
 	public ItemDB itemDB;
 
-	public Model() {
+	public Model(Controller ctrl) {
 		try {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, new File("res/minecraft_font.ttf"));
 			FONT = font.deriveFont(Slot.SIZE/3f);
@@ -24,7 +24,7 @@ public class Model {
 			System.err.println("Could not load main font: " + e.getMessage());
 		}
 		itemDB = new ItemDB();
-		inventory = new Inventory(); // Initialize everything *before* panel
+		inventory = new Inventory(ctrl); // Initialize everything *before* panel
 
 		// -------------- Filling with items
 		inventory.setSlot(0, 0, ItemDB.getItem("pumpkin_pie"), 1);
@@ -38,7 +38,8 @@ public class Model {
 	}
 
 	public static void main(String[] args) {
-		Model model = new Model();
+		Controller ctrl = new Controller();
+		Model model = new Model(ctrl);
 		new View(model);
 	}
 }

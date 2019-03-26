@@ -20,7 +20,7 @@ public class CraftingTable extends Container {
 	private BufferedImage backgroundImage;
 	
 	
-	public CraftingTable() {
+	public CraftingTable(Controller ctrl) {
 		try {
 			backgroundImage = ImageIO.read(new File(BACKGROUND_IMAGE_PATH));
 		} catch (IOException e) {
@@ -37,10 +37,10 @@ public class CraftingTable extends Container {
 		this.tab = new Slot[ROWS][COLS];
 		for (int r = 0; r < ROWS; r++)
 			for (int c = 0; c < COLS; c++) {
-				this.tab[r][c] = new Slot();
+				this.tab[r][c] = new Slot(ctrl);
 				this.add("" + r + c, tab[r][c]); // Slot at (3, 2) has name "32"
 			}
-		this.res = new Slot();
+		this.res = new Slot(ctrl);
 		this.res.setLocation(200, Slot.SIZE * 4);
 		//this.add(this.res);
 		
