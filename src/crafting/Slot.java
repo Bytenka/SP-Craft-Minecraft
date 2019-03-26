@@ -66,9 +66,17 @@ public class Slot extends JComponent implements MouseListener {
 		this.quantity = quantity;
 	}
 
-	public void removeItem() {
+	public void clear() {
 		this.item = null;
 		this.quantity = 0;
+	}
+
+	public static void swapItems(Slot item1, Slot item2) {
+		Item tempItem = item2.item;
+		int tempQuantity = item2.quantity;
+		
+		item2.setItem(item1.item, item1.quantity);
+		item1.setItem(tempItem, tempQuantity);
 	}
 
 	@Override

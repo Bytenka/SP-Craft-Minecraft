@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public final class ItemDB {
-
 	private static HashMap<String, Item> MapItems;
 
 	public ItemDB() {
