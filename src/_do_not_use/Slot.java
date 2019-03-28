@@ -1,4 +1,4 @@
-package crafting;
+package _do_not_use;
 
 import java.awt.Color;
 import java.awt.Graphics;

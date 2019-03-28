@@ -1,0 +1,14 @@
+
+/* Slots */
+.itemSlot {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 0;
+    -fx-focus-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+
+}
+
+.itemSlot:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.4);
+}

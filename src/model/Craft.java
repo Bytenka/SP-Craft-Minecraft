@@ -1,4 +1,6 @@
-package crafting;
+package model;
+
+import view.Item;
 
 public class Craft {
 

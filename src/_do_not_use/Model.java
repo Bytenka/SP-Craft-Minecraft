@@ -1,4 +1,4 @@
-package crafting;
+package _do_not_use;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -50,7 +50,7 @@ public class Model {
 		inventory.setSlot(0, 6, ItemDB.getItem("beef_raw"), 1);
 		// -------------- TODO move or remove that
 	}
-
+/*
 	public static void main(String[] args) {
 		Model model = new Model();
 		View view = new View();
@@ -60,4 +60,5 @@ public class Model {
 		view.init(model, controller);
 		controller.init(model, view);
 	}
+	*/
 }

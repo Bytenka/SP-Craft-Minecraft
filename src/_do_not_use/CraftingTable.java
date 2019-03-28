@@ -1,4 +1,4 @@
-package crafting;
+package _do_not_use;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -22,8 +22,6 @@ public class CraftingTable extends Container {
 	
 	private BufferedImage backgroundImage;
 	
-	
-
 	public CraftingTable(Controller ctrl) {
 		this.setBackground(Color.pink);
 		this.setVisible(true);
