@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import model.Craft;
 
 public class CraftingTable extends Pane {
 	// Where we make the crafts
@@ -35,6 +36,7 @@ public class CraftingTable extends Pane {
 				System.err.println("Could not set inventory background");
 			}
 		}
+		
 	}
 	
 	private CraftingBench craftingBench;
@@ -50,6 +52,16 @@ public class CraftingTable extends Pane {
 		
 		craftResult.setLayoutX(260);
 		craftResult.setLayoutY(Slot.SIZE + SlotsTable.GAP_SIZE);
+	}
+	
+	public void update() {
+		Item[][] tabItems = new Item[craftingBench.slots.length][craftingBench.slots[0].length];
+		for (int i = 0; i < craftingBench.slots.length; i++) {
+			for (int j = 0; j < craftingBench.slots[i].length; j++) {
+				tabItems[i][j]=craftingBench.getSlot(i, j).getItem();
+			}
+		}
+		Craft tabCraft = new Craft(tabItems);
 	}
 	
 	public void setResult(Item item) {
