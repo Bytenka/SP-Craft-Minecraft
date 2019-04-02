@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import controller.Controller;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -17,8 +18,8 @@ public class CraftingTable extends Pane {
 
 		private ImageView backgroundImage;
 
-		public CraftingBench() {
-			super(ROWS, COLS);
+		public CraftingBench(Controller controller) {
+			super(ROWS, COLS, controller);
 			try {
 				throw new FileNotFoundException(); // TODO remove that when the code below is ready
 				/*
@@ -41,9 +42,9 @@ public class CraftingTable extends Pane {
 	private CraftingBench craftingBench;
 	private Slot craftResult;
 	
-	public CraftingTable() {
-		craftingBench = new CraftingBench();
-		craftResult = new Slot();
+	public CraftingTable(Controller controller) {
+		craftingBench = new CraftingBench(controller);
+		craftResult = new Slot(controller);
 		craftResult.setContentUserModifiable(false);
 		
 		this.getChildren().add(craftingBench);

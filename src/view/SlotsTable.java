@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
@@ -11,7 +12,7 @@ public class SlotsTable extends Pane {
 	private TilePane layout;
 	private Slot[][] slots;
 
-	public SlotsTable(int rows, int cols) {
+	public SlotsTable(int rows, int cols, Controller controller) {
 		if (rows < 0 || cols < 0)
 			throw new RuntimeException("Cannot create slot table with " + rows + " rows and " + cols + " columns");
 		
@@ -26,7 +27,7 @@ public class SlotsTable extends Pane {
 		slots = new Slot[rows][cols];
 		for (int r = 0; r < rows; r++)
 			for (int c = 0; c < cols; c++) {
-				Slot s = new Slot();
+				Slot s = new Slot(controller);
 				slots[r][c] = s;
 				layout.getChildren().add(s);
 			}

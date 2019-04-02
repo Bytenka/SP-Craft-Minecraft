@@ -47,8 +47,8 @@ public class Model {
 
 		this.itemGraphicsFactory = new ItemGraphicsFactory();
 		this.itemDB = new ItemDB();
-		this.inventory = new Inventory();
-		this.craftingTable = new CraftingTable();
+		this.inventory = new Inventory(controller);
+		this.craftingTable = new CraftingTable(controller);
 		this.playerHand = new PlayerHand();
 	}
 }

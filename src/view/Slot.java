@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -19,7 +20,7 @@ public class Slot extends Group {
 	private Group itemGraphics;
 	private Text quantityText;
 
-	public Slot() {
+	public Slot(Controller controller) {
 		contentUserModifiable = true;
 
 		itemGraphics = new Group();
@@ -41,10 +42,11 @@ public class Slot extends Group {
 
 		clear();
 
-		initializeEventHandelers();
+		initializeEventHandelers(controller);
 	}
 
 	public void setItem(Item item, int quantity) { // TODO this should maybe be private
+		this.clear();
 		this.item = item;
 
 		if (item.getIs3D())
@@ -60,10 +62,12 @@ public class Slot extends Group {
 	}
 
 	public void clear() {
-		this.item = null;
-		this.quantity = 0;
-		this.quantityText.setText("");
-		itemGraphics.getChildren().clear();
+		if (contentUserModifiable) {
+			this.item = null;
+			this.quantity = 0;
+			this.quantityText.setText("");
+			itemGraphics.getChildren().clear();
+		}
 	}
 
 	public void setQuantity(int quantity) {
@@ -87,11 +91,11 @@ public class Slot extends Group {
 	public int getQuantity() {
 		return this.quantity;
 	}
-	
+
 	public void setContentUserModifiable(boolean value) {
 		contentUserModifiable = value;
 	}
-	
+
 	public boolean getContentUserModifiable() {
 		return contentUserModifiable;
 	}
@@ -114,17 +118,6 @@ public class Slot extends Group {
 		return false;
 	}
 
-	public static void swap(Slot slot1, Slot slot2) {
-		if (slot1.contentUserModifiable && slot2.contentUserModifiable) {
-			Item tempI = slot2.item;
-			int tempQ = slot2.quantity;
-
-			slot2.setItem(slot1.item, slot1.quantity);
-			slot1.setItem(tempI, tempQ);
-		} else
-			throw new RuntimeException("Cannot swap items: slot content is not user modifiable");
-	}
-
 	@Override
 	public String toString() {
 		if (this.item != null)
@@ -132,11 +125,11 @@ public class Slot extends Group {
 		return "none";
 	}
 
-	private void initializeEventHandelers() {
+	private void initializeEventHandelers(Controller controller) {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println(Slot.this.toString());
+				controller.slotClicked(Slot.this);
 			}
 		});
 
