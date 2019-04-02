@@ -10,7 +10,7 @@ public class SlotsTable extends Pane {
 	public static final int GAP_SIZE = 5;
 	
 	private TilePane layout;
-	private Slot[][] slots;
+	protected Slot[][] slots;
 
 	public SlotsTable(int rows, int cols, Controller controller) {
 		if (rows < 0 || cols < 0)
