@@ -1,7 +1,7 @@
 
 /* Slots */
 .itemSlot {
-    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-color: transparent;
     -fx-background-radius: 0;
     -fx-focus-color: transparent;
     -fx-border-color: transparent;
