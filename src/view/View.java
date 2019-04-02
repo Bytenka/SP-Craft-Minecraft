@@ -3,6 +3,8 @@ package view;
 import controller.Controller;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.Craft;
+import model.ItemDB;
 import model.Model;
 
 public class View extends Application {	
@@ -23,10 +25,23 @@ public class View extends Application {
 		ViewManager manager = new ViewManager(model, controller);
 		
 		primaryStage.setScene(manager.getMainScene());
+		
+		//Sneaky Main (Start)
+		Item[][] truc = new Item[][]{
+			{null, null, null},
+            {null, null, null},
+            {null, null, null}};
+        Craft allo = new Craft(truc);
+        System.out.println(allo);
+
+        //Sneaky Main (End)
+
 		primaryStage.show();
 	}
 
 	public static void main(String[] args) {
+		
 		Application.launch(args);
+		
 	}
 }
