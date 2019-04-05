@@ -42,4 +42,12 @@ public class SlotsTable extends Pane {
 	public Slot getSlot(int row, int col) {
 		return slots[row][col];
 	}
+	
+	public int getRows() {
+		return layout.getPrefRows();
+	}
+	
+	public int getCols() {
+		return layout.getPrefColumns();
+	}
 }

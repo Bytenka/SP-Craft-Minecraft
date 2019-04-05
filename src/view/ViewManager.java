@@ -3,6 +3,7 @@ package view;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
 import controller.Controller;
@@ -17,8 +19,8 @@ import model.Model;
 
 // This class holds scenes, in case we want to expand the game
 public class ViewManager {
-	public static final int WIDTH = 1000;
-	public static final int HEIGHT = 700;
+	public static final int WIDTH = 1300;
+	public static final int HEIGHT = 900;
 	
 	// Scenes
 	private Scene craftingScene;
@@ -36,7 +38,11 @@ public class ViewManager {
 		// Init
 		craftingLayout = new Group();
 		craftingScene = new Scene(craftingLayout, WIDTH, HEIGHT);
-		craftingScene.setFill(Color.DARKSLATEGRAY);
+		
+		// Setting up the background
+		Image img = new Image("file:res/crafting_background.png");
+		ImagePattern backgroundImage = new ImagePattern(img, 0, 0, img.getWidth(), img.getHeight(), false);
+		craftingScene.setFill(backgroundImage);		
 
 		// Adding objects to scene
 		craftingLayout.getChildren().add(model.inventory);
@@ -44,9 +50,10 @@ public class ViewManager {
 		craftingLayout.getChildren().add(model.playerHand);
 		
 		// Placing objects in scene
-		model.inventory.setLayoutX(10);
+		model.inventory.setLayoutX(craftingScene.getWidth()/2 - model.inventory.getWidth()/2);
 		model.inventory.setLayoutY(10);
-		model.craftingTable.setLayoutX(10);
+		model.craftingTable.setLayoutX(craftingScene.getWidth()/2 - model.craftingTable.getWidth()/2);
+		System.out.println(model.craftingTable.getWidth());
 		model.craftingTable.setLayoutY(300);
 
 		// Load graphics from CSS

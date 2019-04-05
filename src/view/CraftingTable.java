@@ -15,44 +15,48 @@ public class CraftingTable extends Pane {
 	private class CraftingBench extends SlotsTable {
 		private static final int ROWS = 3;
 		private static final int COLS = 3;
-		private static final int ARROW_SIZE = 45;
-		private static final String BACKGROUND_IMAGE_PATH = "res/graphics/ui/crafting_table.png";
-
-		private ImageView backgroundImage;
 
 		public CraftingBench(Controller controller) {
 			super(ROWS, COLS, controller);
-			try {
-				Image bi = new Image(
-						new FileInputStream(new File(BACKGROUND_IMAGE_PATH)), 
-						Slot.SIZE * (COLS + 2) + (COLS + 1) * SlotsTable.GAP_SIZE + ARROW_SIZE,
-						Slot.SIZE * ROWS + (ROWS - 1) * SlotsTable.GAP_SIZE,
-						false, 
-						false
-				);
-				backgroundImage = new ImageView(bi);
-				this.getChildren().add(0, backgroundImage); // Adds behind everything
-				
-			} catch (FileNotFoundException e) {
-				System.err.println("Could not set inventory background");
-			}
 		}
 		
 	}
 	
+	private static final String BACKGROUND_IMAGE_PATH = "res/graphics/ui/crafting_table.png";
+	private static final int ARROW_SIZE = 45;
+	
 	private CraftingBench craftingBench;
 	private Slot craftResult;
+	private ImageView backgroundImage;
 	
 	public CraftingTable(Controller controller) {
 		craftingBench = new CraftingBench(controller);
 		craftResult = new Slot(controller);
 		craftResult.setContentUserModifiable(false);
 		
-		this.getChildren().add(craftingBench);
-		this.getChildren().add(craftResult);
+		this.setWidth(Slot.SIZE * (craftingBench.getRows() + 2) + (craftingBench.getCols() + 1) * SlotsTable.GAP_SIZE + ARROW_SIZE);
+		this.setHeight(Slot.SIZE * craftingBench.getRows() + (craftingBench.getRows() - 1) * SlotsTable.GAP_SIZE);
+		
+		try {
+			Image bi = new Image(
+					new FileInputStream(new File(BACKGROUND_IMAGE_PATH)), 
+					this.getWidth(),
+					this.getHeight(),
+					false, 
+					false
+			);
+			backgroundImage = new ImageView(bi);
+			this.getChildren().add(0, backgroundImage); // Adds behind everything
+			
+		} catch (FileNotFoundException e) {
+			System.err.println("Could not set inventory background");
+		}
 		
 		craftResult.setLayoutX(260);
 		craftResult.setLayoutY(Slot.SIZE + SlotsTable.GAP_SIZE);
+		
+		this.getChildren().add(craftingBench);
+		this.getChildren().add(craftResult);
 	}
 	
 	public void update() {

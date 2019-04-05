@@ -22,11 +22,14 @@ public class Inventory extends SlotsTable {
 
 	public Inventory(Controller controller) {
 		super(ROWS, COLS, controller);
+		this.setWidth(Slot.SIZE * COLS + (COLS - 1) * GAP_SIZE);
+		this.setHeight(Slot.SIZE * ROWS + (ROWS - 1) * GAP_SIZE);
+		
 		try {
 			Image bi = new Image(
 					new FileInputStream(new File(BACKGROUND_IMAGE_PATH)), 
-					Slot.SIZE * COLS + (COLS - 1) * GAP_SIZE,
-					Slot.SIZE * ROWS + (ROWS - 1) * GAP_SIZE, 
+					this.getWidth(),
+					this.getHeight(), 
 					false, 
 					false
 			);
