@@ -14,7 +14,7 @@ public class CraftingTable extends Pane {
 	// Where we make the crafts
 	private class CraftingBench extends SlotsTable {
 		private static final int ROWS = 3;
-		private static final int COLS = 3;
+		public static final int COLS = 3;
 
 		public CraftingBench(Controller controller) {
 			super(ROWS, COLS, controller);
@@ -60,13 +60,14 @@ public class CraftingTable extends Pane {
 	}
 	
 	public void update() {
-		Item[][] tabItems = new Item[craftingBench.slots.length][craftingBench.slots[0].length];
-		for (int i = 0; i < craftingBench.slots.length; i++) {
-			for (int j = 0; j < craftingBench.slots[i].length; j++) {
+		Item[][] tabItems = new Item[CraftingBench.ROWS][CraftingBench.COLS];
+		for (int i = 0; i < CraftingBench.ROWS; i++) {
+			for (int j = 0; j < CraftingBench.COLS; j++) {
 				tabItems[i][j]=craftingBench.getSlot(i, j).getItem();
 			}
 		}
 		Craft tabCraft = new Craft(tabItems);
+		System.out.println(tabCraft);
 	}
 	
 	public void setResult(Item item) {

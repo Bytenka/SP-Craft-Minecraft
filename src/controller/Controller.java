@@ -55,8 +55,7 @@ public class Controller {
 					model.playerHand.removeQuantity(1);
 			}
 		}
-
-		// TODO update crafting table (call Pricilien's function)
+		model.craftingTable.update();
 	}
 
 	public void init(Model model, View view) {
