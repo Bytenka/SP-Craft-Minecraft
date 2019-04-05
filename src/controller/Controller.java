@@ -18,31 +18,41 @@ public class Controller {
 		model.playerHand.updatePosition(mouseEvent);
 	}
 
-	public void slotClicked(Slot slot) {
-		if (slot.getContentUserModifiable()) {
-			if (!model.playerHand.isEmpty()) {
-				if (!slot.isEmpty()) {
-					if (slot.getItem().equals(model.playerHand.getItem())) {
-						// Stack the items
-						slot.addQuantity(model.playerHand.getQuantity());
-						model.playerHand.clear();
+	public void slotClicked(Slot slot, MouseEvent event) {
+		// Switch on the buttons
+		if (event.isPrimaryButtonDown()) {
+			// Take or release a stack of items
+			if (slot.getContentUserModifiable()) {
+				if (!model.playerHand.isEmpty()) {
+					if (!slot.isEmpty()) {
+						if (slot.getItem().equals(model.playerHand.getItem())) {
+							// Stack the items
+							slot.addQuantity(model.playerHand.getQuantity());
+							model.playerHand.clear();
+
+						} else {
+							// Swap items
+							Item tempI = model.playerHand.getItem();
+							int tempQ = model.playerHand.getQuantity();
+
+							model.playerHand.setItemFromSlot(slot);
+							slot.setItem(tempI, tempQ);
+						}
 
 					} else {
-						// Swap items
-						Item tempI = model.playerHand.getItem();
-						int tempQ = model.playerHand.getQuantity();
-
-						model.playerHand.setItemFromSlot(slot);
-						slot.setItem(tempI, tempQ);
+						slot.setItem(model.playerHand.getItem(), model.playerHand.getQuantity());
+						model.playerHand.clear();
 					}
-
-				} else {
-					slot.setItem(model.playerHand.getItem(), model.playerHand.getQuantity());
-					model.playerHand.clear();
+				} else if (!slot.isEmpty()) {
+					model.playerHand.setItemFromSlot(slot);
+					slot.clear();
 				}
-			} else if (!slot.isEmpty()) {
-				model.playerHand.setItemFromSlot(slot);
-				slot.clear();
+			}
+		} else if (event.isSecondaryButtonDown()) {
+			// Drop one item in the clicked slot, if possible
+			if (!model.playerHand.isEmpty()) {
+				if (slot.putItem(model.playerHand.getItem(), 1))
+					model.playerHand.removeQuantity(1);
 			}
 		}
 

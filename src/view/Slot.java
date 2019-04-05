@@ -49,7 +49,7 @@ public class Slot extends Group {
 		this.clear();
 		this.item = item;
 
-		if (item.getIs3D())
+		if (this.item.getIs3D())
 			itemGraphics.getChildren().add(ItemGraphicsFactory.make3D(item.getImage()));
 		else
 			itemGraphics.getChildren().add(ItemGraphicsFactory.make2D(item.getImage()));
@@ -104,7 +104,7 @@ public class Slot extends Group {
 		return this.item == null;
 	}
 
-	public boolean putItem(Item item, int quantity) { // This method TRIES to put the item, and handles stacking
+	public boolean putItem(Item item, int quantity) { // This method TRIES to put the item, and handles stacking. Returns true if the item was added
 		if (contentUserModifiable) {
 			if (this.isEmpty()) {
 				this.setItem(item, quantity);
@@ -129,13 +129,13 @@ public class Slot extends Group {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				controller.slotClicked(Slot.this);
 			}
 		});
 
 		button.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+				controller.slotClicked(Slot.this, event);
 			}
 		});
 

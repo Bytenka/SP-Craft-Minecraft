@@ -40,7 +40,7 @@ public class ViewManager {
 		craftingScene = new Scene(craftingLayout, WIDTH, HEIGHT);
 		
 		// Setting up the background
-		Image img = new Image("file:res/crafting_background.png");
+		Image img = new Image("file:res/graphics/crafting_background.png");
 		ImagePattern backgroundImage = new ImagePattern(img, 0, 0, img.getWidth(), img.getHeight(), false);
 		craftingScene.setFill(backgroundImage);		
 
@@ -51,10 +51,9 @@ public class ViewManager {
 		
 		// Placing objects in scene
 		model.inventory.setLayoutX(craftingScene.getWidth()/2 - model.inventory.getWidth()/2);
-		model.inventory.setLayoutY(10);
+		model.inventory.setLayoutY(500);
 		model.craftingTable.setLayoutX(craftingScene.getWidth()/2 - model.craftingTable.getWidth()/2);
-		System.out.println(model.craftingTable.getWidth());
-		model.craftingTable.setLayoutY(300);
+		model.craftingTable.setLayoutY(200);
 
 		// Load graphics from CSS
 		File styleCSS = new File(Model.CSS_PATH + "crafting.css");

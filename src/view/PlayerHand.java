@@ -46,6 +46,13 @@ public class PlayerHand extends Pane {
 		return quantity;
 	}
 	
+	public void removeQuantity(int quantity) {
+		this.quantity -= quantity;
+		
+		if (this.quantity <= 0)
+			this.clear();
+	}
+	
 	public boolean isEmpty() {
 		return item == null;
 	}

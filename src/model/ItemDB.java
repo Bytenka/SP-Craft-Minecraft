@@ -14,23 +14,56 @@ public final class ItemDB {
 		items = new HashMap<>();
 
 		File dirItems = new File(Model.ITEMS_PATH);
-		File[] listeImgItems = dirItems.listFiles();
+		File dirBlocks = new File(Model.BLOCKS_PATH);
 
+		int loaded = 0;
 		int notLoaded = 0;
-		for (File file : listeImgItems) {
-			String nom = file.getName().split("\\.")[0];
-			
-			try {
-				if (items.containsKey(nom))
-					throw new RuntimeException("An item with the same name already exists in the database");
-				items.put(nom, new Item(nom, new FileInputStream(file), false));
-				
-			} catch (IOException | RuntimeException e) {
-				System.err.println("Could not load Item \"" + nom + "\": " + e.getMessage());
-				notLoaded++;
+		// Loading items
+		{
+			File[] listeImg = dirItems.listFiles();
+
+			for (File file : listeImg) {
+				String nom = file.getName().split("\\.")[0];
+
+				try {
+					Item item = new Item(nom, new FileInputStream(file), false);
+					ItemDB.addItem(nom, item);
+					loaded++;
+
+				} catch (IOException | RuntimeException e) {
+					System.err.println("Could not load item: " + e.getMessage());
+					notLoaded++;
+				}
 			}
 		}
-		System.out.println("Items database: loaded " + (listeImgItems.length - notLoaded) + " items");
+
+		// Loading blocks
+		{
+			File[] listeImg = dirBlocks.listFiles();
+
+			for (File file : listeImg) {
+				String nom = file.getName().split("\\.")[0];
+
+				try {
+					Item item = new Item(nom, new FileInputStream(file), true);
+					ItemDB.addItem(nom, item);
+					loaded++;
+
+				} catch (IOException | RuntimeException e) {
+					System.err.println("Could not load block: " + e.getMessage());
+					notLoaded++;
+				}
+			}
+		}
+
+		System.out.println("Items database: loaded " + (loaded - notLoaded) + " objects");
+	}
+
+	public static void addItem(String name, Item item) {
+		if (items.containsKey(name))
+			throw new RuntimeException("Object with name \"" + name + "\" already exists in the database!");
+
+		items.put(name, item);
 	}
 
 	public static HashMap<String, Item> getItems() {
