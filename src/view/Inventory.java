@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import model.ItemDB;
+import model.Slot;
+import model.SlotsTable;
 
 public class Inventory extends SlotsTable {
 	private static final int ROWS = 3;

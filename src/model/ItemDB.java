@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
-import view.Item;
-
 public final class ItemDB {
 	private static HashMap<String, Item> items;
 

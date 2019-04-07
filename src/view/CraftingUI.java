@@ -50,12 +50,12 @@ public class CraftingUI extends Pane {
 		
 		// Make effects to tweak the image
 		Blend blend = new Blend(BlendMode.MULTIPLY, null,
-				new ColorInput(0, 0, iw.getFitWidth(), iw.getFitHeight(), Color.grayRgb(210)));
+				new ColorInput(0, 0, iw.getFitWidth(), iw.getFitHeight(), Color.grayRgb(180)));
 
 		BoxBlur blur = new BoxBlur();
-		blur.setWidth(20);
-		blur.setHeight(20);
-		blur.setIterations(3);
+		blur.setWidth(5);
+		blur.setHeight(5);
+		blur.setIterations(5);
 		blur.setInput(blend);
 		
 		iw.setEffect(blur);

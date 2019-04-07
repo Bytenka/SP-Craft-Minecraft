@@ -1,9 +1,9 @@
 package controller;
 
 import javafx.scene.input.MouseEvent;
+import model.Item;
 import model.Model;
-import view.Item;
-import view.Slot;
+import model.Slot;
 import view.View;
 
 public class Controller {
@@ -29,46 +29,52 @@ public class Controller {
 		switch (event.getButton()) {
 		case PRIMARY: {
 			// Take or release a stack of items
-			if (slot.getContentUserModifiable()) {
+			if (!slot.isEmpty()) {
 				if (!model.playerHand.isEmpty()) {
-					if (!slot.isEmpty()) {
-						if (slot.getItem().equals(model.playerHand.getItem())) {
-							// Stack the items
-							slot.addQuantity(model.playerHand.getQuantity());
+					if (slot.isContentUserSettable()) {
+						// Attempt stacking
+						if (slot.putItem(model.playerHand.getItem(), model.playerHand.getQuantity()))
 							model.playerHand.clear();
-
-						} else {
-							// Swap items
+						else {
+							// Swap
 							Item tempI = model.playerHand.getItem();
 							int tempQ = model.playerHand.getQuantity();
 
-							model.playerHand.setItemFromSlot(slot);
-							slot.setItem(tempI, tempQ);
+							model.playerHand.replaceItem(slot.getItem(), slot.getQuantity());
+							slot.replaceItem(tempI, tempQ);
 						}
-
-					} else {
-						slot.setItem(model.playerHand.getItem(), model.playerHand.getQuantity());
-						model.playerHand.clear();
 					}
-				} else if (!slot.isEmpty()) {
-					model.playerHand.setItemFromSlot(slot);
+				} else {
+					model.playerHand.replaceItem(slot.getItem(), slot.getQuantity());
 					slot.clear();
+				}
+			} else if (!model.playerHand.isEmpty()) {
+				if (slot.isContentUserSettable()) {
+					slot.replaceItem(model.playerHand.getItem(), model.playerHand.getQuantity());
+					model.playerHand.clear();
 				}
 			}
 			break;
 		}
-		
+
 		case SECONDARY: {
-			// Drop one item in the clicked slot, if possible
 			if (!model.playerHand.isEmpty()) {
 				if (slot.putItem(model.playerHand.getItem(), 1))
 					model.playerHand.removeQuantity(1);
+			} else if (!slot.isEmpty())
+			{
+				int q = slot.getQuantity() / 2;
+				model.playerHand.replaceItem(slot.getItem(), slot.getQuantity() - q);
+				slot.removeQuantity(slot.getQuantity() - q);
+				
 			}
 			break;
 		}
 		default:
 			break;
 		}
+
+		// Check if a craft was made
 		model.craftingTable.update();
 	}
 }

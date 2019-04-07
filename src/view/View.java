@@ -4,6 +4,7 @@ import controller.Controller;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.Craft;
+import model.Item;
 import model.ItemDB;
 import model.Model;
 

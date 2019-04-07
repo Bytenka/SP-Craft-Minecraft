@@ -9,6 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import model.Craft;
+import model.Item;
+import model.ItemDB;
+import model.Slot;
+import model.SlotsTable;
 
 public class CraftingTable extends Pane {
 	// Where we make the crafts
@@ -32,7 +36,7 @@ public class CraftingTable extends Pane {
 	public CraftingTable(Controller controller) {
 		craftingBench = new CraftingBench(controller);
 		craftResult = new Slot(controller);
-		craftResult.setContentUserModifiable(false);
+		craftResult.setContentUserSettable(false);
 		
 		this.setWidth(Slot.SIZE * (craftingBench.getRows() + 2) + (craftingBench.getCols() + 1) * SlotsTable.GAP_SIZE + ARROW_SIZE);
 		this.setHeight(Slot.SIZE * craftingBench.getRows() + (craftingBench.getRows() - 1) * SlotsTable.GAP_SIZE);
@@ -71,7 +75,7 @@ public class CraftingTable extends Pane {
 	}
 	
 	public void setResult(Item item) {
-		craftResult.setItem(item, 1);
+		craftResult.replaceItem(item, 1);;
 	}
 	
 	public Item getResult() {

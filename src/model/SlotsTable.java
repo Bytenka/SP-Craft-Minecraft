@@ -1,4 +1,4 @@
-package view;
+package model;
 
 import controller.Controller;
 import javafx.geometry.Orientation;
@@ -36,7 +36,8 @@ public class SlotsTable extends Pane {
 	}
 	
 	public void setSlot(int row, int col, Item item, int quantity) {
-		slots[row][col].setItem(item, quantity);
+		if (!slots[row][col].putItem(item, quantity))
+			throw new RuntimeException("Unable to set slot [" + row + ", " + col +"]");
 	}
 
 	public Slot getSlot(int row, int col) {

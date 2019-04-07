@@ -1,60 +1,72 @@
 package view;
 
-import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import model.Item;
+import model.Slot;
 
 public class PlayerHand extends Pane {
 	private Item item;
 	private int quantity;
-	private Group itemGraphics;
+	private DrawableItem itemGraphics;
 
 	public PlayerHand() {
 		super();
-		itemGraphics = new Group();
+		this.setMouseTransparent(true);
+		itemGraphics = new DrawableItem();
 		this.getChildren().add(itemGraphics);
 		clear();
-		this.setMouseTransparent(true);
-	}
-
-	public void clear() {
-		item = null;
-		quantity = 0;
-		itemGraphics.getChildren().clear();
-	}
-
-	public void setItem(Item item, int quantity) {
-		this.clear();
-		this.item = item;
-		this.quantity = quantity;
-		
-		if (item.getIs3D())
-			itemGraphics.getChildren().add(ItemGraphicsFactory.make3D(item.getImage()));
-		else
-		    itemGraphics.getChildren().add(ItemGraphicsFactory.make2D(item.getImage()));
 	}
 	
-	public void setItemFromSlot(Slot slot) {
-		this.setItem(slot.getItem(), slot.getQuantity());
-	}
-
 	public Item getItem() {
-		return item;
+		return this.item;
 	}
 	
 	public int getQuantity() {
-		return quantity;
+		return this.quantity;
+	}
+
+	public boolean isEmpty() {
+		return this.item == null;
+	}
+	
+	public void clear() {
+			this.item = null;
+			this.quantity = 0;
+			itemGraphics.clear();
+	}
+	
+	public void addQuantity(int quantity) {
+		if (quantity < 0)
+			throw new RuntimeException("Cannot add negative quantity");
+		this.setQuantity(this.quantity + quantity);
 	}
 	
 	public void removeQuantity(int quantity) {
-		this.quantity -= quantity;
-		
-		if (this.quantity <= 0)
+		if (this.quantity > quantity)
+			this.setQuantity(this.quantity - quantity);
+		else
 			this.clear();
 	}
 	
-	public boolean isEmpty() {
-		return item == null;
+	public void replaceItem(Item item, int quantity) {
+		if (item == null || quantity <= 0)
+			throw new RuntimeException("Could not replace item with " + item.toString() + " | " + quantity);
+
+		this.setItem(item);
+		this.setQuantity(quantity);
+	}
+	
+	// Does not make any checks
+	private void setItem(Item item) {
+		this.item = item;
+		itemGraphics.set(this.item);
+	}
+
+	// Does not make any checks
+	private void setQuantity(int quantity) {
+		this.quantity = quantity;
+		itemGraphics.setQuantity(quantity);
 	}
 
 	public void updatePosition(MouseEvent event) {
