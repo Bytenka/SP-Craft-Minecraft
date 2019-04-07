@@ -132,7 +132,7 @@ public class Slot extends Group {
 			}
 		});
 
-		button.setOnMousePressed(new EventHandler<MouseEvent>() {
+		button.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				controller.slotClicked(Slot.this, event);

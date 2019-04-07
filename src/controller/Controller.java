@@ -14,13 +14,20 @@ public class Controller {
 	public Controller() {
 	}
 
+	public void init(Model model, View view) {
+		this.model = model;
+		this.view = view;
+
+	}
+
 	public void updatePlayerHandPosition(MouseEvent mouseEvent) {
 		model.playerHand.updatePosition(mouseEvent);
 	}
 
 	public void slotClicked(Slot slot, MouseEvent event) {
 		// Switch on the buttons
-		if (event.isPrimaryButtonDown()) {
+		switch (event.getButton()) {
+		case PRIMARY: {
 			// Take or release a stack of items
 			if (slot.getContentUserModifiable()) {
 				if (!model.playerHand.isEmpty()) {
@@ -48,19 +55,20 @@ public class Controller {
 					slot.clear();
 				}
 			}
-		} else if (event.isSecondaryButtonDown()) {
+			break;
+		}
+		
+		case SECONDARY: {
 			// Drop one item in the clicked slot, if possible
 			if (!model.playerHand.isEmpty()) {
 				if (slot.putItem(model.playerHand.getItem(), 1))
 					model.playerHand.removeQuantity(1);
 			}
+			break;
+		}
+		default:
+			break;
 		}
 		model.craftingTable.update();
-	}
-
-	public void init(Model model, View view) {
-		this.model = model;
-		this.view = view;
-
 	}
 }
