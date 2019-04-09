@@ -41,10 +41,10 @@ public class DrawableItem extends Group {
 		
 		this.clear();
 		
-		if (item.getIs3D())
-			itemGraphics.getChildren().add(ItemGraphicsFactory.make3D(item.getImage()));
+		if (item.is3D())
+			itemGraphics.getChildren().add(ItemGraphicsFactory.make3D(item.getImageFront()));
 		else
-			itemGraphics.getChildren().add(ItemGraphicsFactory.make2D(item.getImage()));
+			itemGraphics.getChildren().add(ItemGraphicsFactory.make2D(item.getImageFront()));
 
 	}
 
