@@ -1,0 +1,7 @@
+Clique-droit sur le projet dans Eclipse
+Tout en bas -> "Propriétés"
+Dans le "Java Build Path"
+Dans l'onglet "Libraries"
+"Add External JAR's"
+    - Ajouter json-20180813.jar
+    - Ajouter jre1.8.0_201/lib/ext/jfxrt.jar
