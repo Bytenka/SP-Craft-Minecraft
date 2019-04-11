@@ -80,7 +80,7 @@ public final class ItemGraphicsFactory {
 
 			Translate translate = new Translate();
 			translate.setX(Slot.SIZE / 2.0);
-			translate.setY(Slot.SIZE / 2.5);
+			translate.setY((Slot.SIZE / 2.5)-1); // -1 to fix texture not connecting
 
 			Scale scale = new Scale();
 			scale.setPivotX(Slot.SIZE / 2.0);

@@ -41,7 +41,7 @@ public class Inventory extends SlotsTable {
 
 		// TODO Modify/remove that
 		this.setSlot(0, 0, ItemDB.getItem("pumpkin_pie"), 1);
-		this.setSlot(0, 1, ItemDB.getItem("potion_bottle_drinkable"), 5);
+		this.setSlot(0, 1, ItemDB.getItem("potion_bottle_empty"), 5);
 		this.setSlot(0, 2, ItemDB.getItem("fireball"), 40);
 		this.setSlot(0, 3, ItemDB.getItem("fireball"), 82);
 		this.setSlot(0, 4, ItemDB.getItem("emerald_block"), 5);
