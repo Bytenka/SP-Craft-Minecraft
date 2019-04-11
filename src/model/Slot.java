@@ -49,9 +49,9 @@ public class Slot extends Group {
 	}
 
 	public void clear() {
-			this.item = null;
-			this.quantity = 0;
-			itemGraphics.clear();
+		this.item = null;
+		this.quantity = 0;
+		itemGraphics.clear();
 	}
 
 	public void setContentUserSettable(boolean value) {
@@ -61,7 +61,7 @@ public class Slot extends Group {
 	public boolean isContentUserSettable() {
 		return contentUserSettable;
 	}
-	
+
 	public void setContentUserGettable(boolean value) {
 		contentUserGettable = value;
 	}
@@ -89,7 +89,7 @@ public class Slot extends Group {
 			throw new RuntimeException("Cannot add negative quantity");
 		this.setQuantity(this.quantity + quantity);
 	}
-	
+
 	public void removeQuantity(int quantity) {
 		if (this.quantity > quantity)
 			this.setQuantity(this.quantity - quantity);
@@ -142,6 +142,20 @@ public class Slot extends Group {
 		button.setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
+			}
+		});
+
+		button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				controller.slotMouseEntered(Slot.this, event);
+			}
+		});
+
+		button.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				controller.slotMouseExited(Slot.this, event);
 			}
 		});
 	}

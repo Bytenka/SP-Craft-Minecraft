@@ -53,8 +53,8 @@ public class CraftingUI extends Pane {
 				new ColorInput(0, 0, iw.getFitWidth(), iw.getFitHeight(), Color.grayRgb(180)));
 
 		BoxBlur blur = new BoxBlur();
-		blur.setWidth(5);
-		blur.setHeight(5);
+		blur.setWidth(20);
+		blur.setHeight(20);
 		blur.setIterations(5);
 		blur.setInput(blend);
 		

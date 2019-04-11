@@ -84,7 +84,8 @@ public final class ItemDB {
 
 	public static void addItem(String name, Item item) {
 		if (items.containsKey(name))
-			throw new RuntimeException("Object with name \"" + name + "\" already exists in the database!");
+			throw new RuntimeException(
+					"Object with name \"" + name + "\" already exists in the database! Files must have unique names.");
 
 		items.put(name, item);
 	}

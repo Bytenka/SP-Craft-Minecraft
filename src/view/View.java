@@ -2,10 +2,10 @@ package view;
 
 import controller.Controller;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Craft;
 import model.Item;
-import model.ItemDB;
 import model.Model;
 
 public class View extends Application {	
@@ -16,6 +16,7 @@ public class View extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Minecraft");
 		primaryStage.setResizable(false);
+		primaryStage.getIcons().add(new Image("file:res/graphics/icon.png"));
 		
 		controller = new Controller();
 		model = new Model();
@@ -42,6 +43,5 @@ public class View extends Application {
 
 	public static void main(String[] args) {
 		Application.launch(args);
-		
 	}
 }

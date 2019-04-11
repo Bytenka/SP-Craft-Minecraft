@@ -17,11 +17,21 @@ public class Controller {
 	public void init(Model model, View view) {
 		this.model = model;
 		this.view = view;
-
 	}
 
 	public void updatePlayerHandPosition(MouseEvent mouseEvent) {
 		model.playerHand.updatePosition(mouseEvent);
+	}
+
+	public void slotMouseEntered(Slot slot, MouseEvent event) {
+		if (!slot.isEmpty()) {
+			model.playerHand.setHoveringText(slot.getItem().getName());
+			model.playerHand.setHoveringTextVisible(true);
+		}
+	}
+
+	public void slotMouseExited(Slot slot, MouseEvent event) {
+		model.playerHand.setHoveringTextVisible(false);
 	}
 
 	public void slotClicked(Slot slot, MouseEvent event) {
@@ -71,7 +81,6 @@ public class Controller {
 					model.playerHand.replaceItem(slot.getItem(), slot.getQuantity() - q);
 					slot.removeQuantity(slot.getQuantity() - q);
 				}
-
 			}
 			break;
 		}
@@ -79,7 +88,9 @@ public class Controller {
 			break;
 		}
 
-		// Check if a craft was made
-		model.craftingTable.update();
+		// Check if a craft was made. There is no need to update
+		// the table if the slot can't change anything
+		if (slot.isContentUserGettable() || slot.isContentUserSettable())
+			model.craftingTable.update();
 	}
 }
