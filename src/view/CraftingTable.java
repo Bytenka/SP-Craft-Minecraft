@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import javax.swing.text.GapContent;
+
+import com.sun.corba.se.impl.interceptors.SlotTable;
+
 import controller.Controller;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,7 +27,6 @@ public class CraftingTable extends Pane {
 		public CraftingBench(Controller controller) {
 			super(ROWS, COLS, controller);
 		}
-		
 	}
 	
 	private static final String BACKGROUND_IMAGE_PATH = "res/graphics/ui/crafting_table.png";
@@ -38,8 +41,8 @@ public class CraftingTable extends Pane {
 		craftResult = new Slot(controller);
 		craftResult.setContentUserSettable(false);
 		
-		this.setWidth(Slot.SIZE * (craftingBench.getRows() + 2) + (craftingBench.getCols() + 1) * SlotsTable.GAP_SIZE + ARROW_SIZE);
-		this.setHeight(Slot.SIZE * craftingBench.getRows() + (craftingBench.getRows() - 1) * SlotsTable.GAP_SIZE);
+		this.setWidth(craftingBench.getWidth() + ARROW_SIZE + Slot.SIZE + ARROW_SIZE + SlotsTable.GAP_SIZE * 3);
+		this.setHeight(craftingBench.getHeight());
 		
 		try {
 			Image bi = new Image(

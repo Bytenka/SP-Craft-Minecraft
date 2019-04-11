@@ -36,17 +36,21 @@ public class Controller {
 						if (slot.putItem(model.playerHand.getItem(), model.playerHand.getQuantity()))
 							model.playerHand.clear();
 						else {
-							// Swap
-							Item tempI = model.playerHand.getItem();
-							int tempQ = model.playerHand.getQuantity();
+							if (slot.isContentUserGettable()) {
+								// Swap
+								Item tempI = model.playerHand.getItem();
+								int tempQ = model.playerHand.getQuantity();
 
-							model.playerHand.replaceItem(slot.getItem(), slot.getQuantity());
-							slot.replaceItem(tempI, tempQ);
+								model.playerHand.replaceItem(slot.getItem(), slot.getQuantity());
+								slot.replaceItem(tempI, tempQ);
+							}
 						}
 					}
 				} else {
-					model.playerHand.replaceItem(slot.getItem(), slot.getQuantity());
-					slot.clear();
+					if (slot.isContentUserGettable()) {
+						model.playerHand.replaceItem(slot.getItem(), slot.getQuantity());
+						slot.clear();
+					}
 				}
 			} else if (!model.playerHand.isEmpty()) {
 				if (slot.isContentUserSettable()) {
@@ -61,12 +65,13 @@ public class Controller {
 			if (!model.playerHand.isEmpty()) {
 				if (slot.putItem(model.playerHand.getItem(), 1))
 					model.playerHand.removeQuantity(1);
-			} else if (!slot.isEmpty())
-			{
-				int q = slot.getQuantity() / 2;
-				model.playerHand.replaceItem(slot.getItem(), slot.getQuantity() - q);
-				slot.removeQuantity(slot.getQuantity() - q);
-				
+			} else if (!slot.isEmpty()) {
+				if (slot.isContentUserGettable()) {
+					int q = slot.getQuantity() / 2;
+					model.playerHand.replaceItem(slot.getItem(), slot.getQuantity() - q);
+					slot.removeQuantity(slot.getQuantity() - q);
+				}
+
 			}
 			break;
 		}

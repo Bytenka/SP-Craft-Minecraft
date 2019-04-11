@@ -23,10 +23,7 @@ public class Inventory extends SlotsTable {
 	private ImageView backgroundImage;
 
 	public Inventory(Controller controller) {
-		super(ROWS, COLS, controller);
-		this.setWidth(Slot.SIZE * COLS + (COLS - 1) * GAP_SIZE);
-		this.setHeight(Slot.SIZE * ROWS + (ROWS - 1) * GAP_SIZE);
-		
+		super(ROWS, COLS, controller);		
 		try {
 			Image bi = new Image(
 					new FileInputStream(new File(BACKGROUND_IMAGE_PATH)), 

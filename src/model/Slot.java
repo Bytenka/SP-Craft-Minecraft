@@ -12,6 +12,7 @@ public class Slot extends Group {
 	public static final int SIZE = 50;
 
 	private boolean contentUserSettable;
+	private boolean contentUserGettable;
 	private Item item;
 	private int quantity;
 	private Button button;
@@ -20,6 +21,7 @@ public class Slot extends Group {
 	public Slot(Controller controller) {
 		super();
 		contentUserSettable = true;
+		contentUserGettable = true;
 
 		itemGraphics = new DrawableItem();
 		this.getChildren().add(itemGraphics);
@@ -58,6 +60,14 @@ public class Slot extends Group {
 
 	public boolean isContentUserSettable() {
 		return contentUserSettable;
+	}
+	
+	public void setContentUserGettable(boolean value) {
+		contentUserGettable = value;
+	}
+
+	public boolean isContentUserGettable() {
+		return contentUserGettable;
 	}
 
 	public boolean putItem(Item item, int quantity) {
