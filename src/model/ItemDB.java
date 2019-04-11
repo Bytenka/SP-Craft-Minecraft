@@ -44,19 +44,18 @@ public final class ItemDB {
 				FileInputStream fileFront = null;
 				FileInputStream fileSide = null;
 			}
-			
+
 			File[] listeImg = dirBlocks.listFiles();
 			HashMap<String, BlockInProgress> itemsInProgress = new HashMap<>();
 
 			for (File file : listeImg) {
 				String nom = file.getName().split("\\.")[0];
-				
+
 				String[] oui = nom.split("_");
-				String posAttribute = oui[oui.length-1];
-				
+				String posAttribute = oui[oui.length - 1];
+
 				// TODO
-				
-				
+
 				try {
 					Item item = new Item(nom, new FileInputStream(file), true);
 					ItemDB.addItem(nom, item);
@@ -67,11 +66,11 @@ public final class ItemDB {
 					notLoaded++;
 				}
 			}
-			
+
 			// Add multi-faces blocks
 			for (BlockInProgress b : itemsInProgress.values()) {
 				if (b.fileTop == null || b.fileFront == null || b.fileSide == null)
-					System.out.println("Block \"" + b.name +"\" is incomplete! Fire the cookie");
+					System.out.println("Block \"" + b.name + "\" is incomplete! Fire the cookie");
 				else {
 					Item i = new Item(b.name, b.fileFront, b.fileSide, b.fileTop, true);
 					ItemDB.addItem(b.name, i);
