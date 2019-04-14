@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.function.Function;
@@ -43,6 +44,10 @@ public final class ItemDB {
 				FileInputStream fileTop = null;
 				FileInputStream fileFront = null;
 				FileInputStream fileSide = null;
+
+				public BlockInProgress(String name) {
+					this.name = name;
+				}
 			}
 
 			File[] listeImg = dirBlocks.listFiles();
@@ -51,26 +56,51 @@ public final class ItemDB {
 			for (File file : listeImg) {
 				String nom = file.getName().split("\\.")[0];
 
-				String[] oui = nom.split("_");
-				String posAttribute = oui[oui.length - 1];
+				int lio_ = nom.lastIndexOf("_");
+				String posAttr = nom.substring(lio_ + 1);
 
-				// TODO
+				if (posAttr.contentEquals("top") || posAttr.contentEquals("front") || posAttr.contentEquals("side")) {
+					nom = nom.substring(0, lio_);
+					itemsInProgress.putIfAbsent(nom, new BlockInProgress(nom));
 
-				try {
-					Item item = new Item(nom, new FileInputStream(file), true);
-					ItemDB.addItem(nom, item);
-					loaded++;
-
-				} catch (IOException | RuntimeException e) {
-					System.err.println("Could not load block: " + e.getMessage());
-					notLoaded++;
+					BlockInProgress block = itemsInProgress.get(nom);
+					try {
+						switch(posAttr)
+						{
+						case "top":
+							if (block.fileTop == null)
+								block.fileTop = new FileInputStream(file);
+							break;
+						case "front":
+							if (block.fileFront == null)
+								block.fileFront = new FileInputStream(file);
+							break;
+						case "side":
+							if (block.fileSide == null)
+								block.fileSide = new FileInputStream(file);
+							break;
+						}
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+					
+				} else {		
+					try {
+						Item item = new Item(nom, new FileInputStream(file), true);
+						ItemDB.addItem(nom, item);
+						loaded++;
+						
+					} catch (IOException | RuntimeException e) {
+						System.err.println("Could not load block: " + e.getMessage());
+						notLoaded++;
+					}
 				}
 			}
 
 			// Add multi-faces blocks
 			for (BlockInProgress b : itemsInProgress.values()) {
 				if (b.fileTop == null || b.fileFront == null || b.fileSide == null)
-					System.out.println("Block \"" + b.name + "\" is incomplete! Fire the cookie");
+					System.err.println("Block \"" + b.name + "\" is incomplete! Fire the cookie");
 				else {
 					Item i = new Item(b.name, b.fileFront, b.fileSide, b.fileTop, true);
 					ItemDB.addItem(b.name, i);

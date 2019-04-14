@@ -17,11 +17,11 @@ public final class ItemGraphicsFactory {
 		return g;
 	}
 
-	public static Group make3D(Image img) {
-		return make3D(img, img, img);
+	public static Group make3D(Image blockFront) {
+		return make3D(blockFront, blockFront, blockFront);
 	}
 
-	public static Group make3D(Image blockTop, Image blockLeft, Image blockRight) {
+	public static Group make3D(Image blockTop, Image blockFront, Image blockSide) {
 		Group group = new Group();
 
 		// Top part
@@ -50,7 +50,7 @@ public final class ItemGraphicsFactory {
 
 		// Left part
 		{
-			ImageView left = new ImageView(blockLeft);
+			ImageView left = new ImageView(blockFront);
 
 			Translate translate = new Translate();
 			translate.setY(Slot.SIZE / 5.0);
@@ -76,7 +76,7 @@ public final class ItemGraphicsFactory {
 
 		// Right part
 		{
-			ImageView right = new ImageView(blockRight);
+			ImageView right = new ImageView(blockSide);
 
 			Translate translate = new Translate();
 			translate.setX(Slot.SIZE / 2.0);

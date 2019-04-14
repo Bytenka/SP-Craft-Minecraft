@@ -25,7 +25,7 @@ public class Controller {
 
 	public void slotMouseEntered(Slot slot, MouseEvent event) {
 		if (!slot.isEmpty()) {
-			model.playerHand.setHoveringText(slot.getItem().getName());
+			model.playerHand.setHoveringText(slot.getItem().getDisplayName());
 			model.playerHand.setHoveringTextVisible(true);
 		}
 	}

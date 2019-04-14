@@ -38,12 +38,17 @@ public class DrawableItem extends Group {
 	public void set(Item item) {
 		if (item == null)
 			throw new RuntimeException("Item is null");
-		
+
 		this.clear();
-		
-		if (item.is3D())
-			itemGraphics.getChildren().add(ItemGraphicsFactory.make3D(item.getImageFront()));
-		else
+
+		if (item.is3D()) {
+			if (item.getIsMultiFaces())
+				itemGraphics.getChildren()
+						.add(ItemGraphicsFactory.make3D(item.getImageTop(), item.getImageFront(), item.getImageSide()));
+			else
+				itemGraphics.getChildren().add(ItemGraphicsFactory.make3D(item.getImageFront()));
+
+		} else
 			itemGraphics.getChildren().add(ItemGraphicsFactory.make2D(item.getImageFront()));
 
 	}
@@ -54,7 +59,7 @@ public class DrawableItem extends Group {
 			quantityText.setText("+" + maxVal);
 			return;
 		}
-		
+
 		if (quantity >= 2) {
 			quantityText.setText("" + quantity);
 			return;

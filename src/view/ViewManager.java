@@ -51,6 +51,8 @@ public class ViewManager {
 		ui.updateGraphics(img); // Because we moved the ui, we must reconstruct the background
 		craftingLayout.getChildren().add(ui);
 
+		craftingLayout.getChildren().add(craftingList);
+
 		craftingLayout.getChildren().add(model.playerHand);
 
 		// Load graphics from CSS
@@ -65,7 +67,6 @@ public class ViewManager {
 			}
 		});
 
-		craftingLayout.getChildren().add(craftingList);
 
 	}
 }
