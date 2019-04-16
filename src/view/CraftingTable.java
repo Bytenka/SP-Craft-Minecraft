@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import javax.swing.text.GapContent;
-
-import com.sun.corba.se.impl.interceptors.SlotTable;
 
 import controller.Controller;
 import javafx.scene.image.Image;
