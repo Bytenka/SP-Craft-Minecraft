@@ -2,10 +2,8 @@ package model;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,13 +15,14 @@ public final class CraftDB {
 	ArrayList<HashMap<String,InternalCraft>> craftDB;
 	
 	private class InternalCraft{
+		@SuppressWarnings("unused")
 		int quantity;
+		@SuppressWarnings("unused")
 		Item[][] recipe;
 	}
 	
+	@SuppressWarnings("static-access")
 	public CraftDB() throws IOException {
-		// TODO remplacer String[][] par Item[][] (voir getItem dans ItemDB)
-		// HashMap<String,HashMap<String,String[][]>> craftDB = new HashMap<String, HashMap<String, String[][]>>();
 		this.craftDB = new ArrayList<HashMap<String,InternalCraft>>();
 		// 0: 11
 		// 1: 22
@@ -32,12 +31,14 @@ public final class CraftDB {
 		// 4: 23
 		// 5: 13
 		// 6: 32
-		File craftJson = new File("res/CraftDB2.json");
+		int loaded = 0;		// Number of Crafts loaded
+		File craftJson = new File("res/CraftDB.json");
 		InputStream is = new FileInputStream(craftJson);
 		JSONTokener tokens = new JSONTokener(is);
 		JSONObject craftDBJson = new JSONObject(tokens);
 		InternalCraft ic = new InternalCraft();
 		HashMap<String, InternalCraft> hashMap = null;
+		ItemDB itemDB = new ItemDB();
 		for (Iterator<String> iterator = craftDBJson.keys(); iterator.hasNext();) {
 			String key = iterator.next();
 			if (key.length()==2) {
@@ -46,38 +47,26 @@ public final class CraftDB {
 				hashMap = new HashMap<String, InternalCraft>();
 				for (Iterator<String> iterator2 = tokenobj.keys(); iterator2.hasNext();) {
 					String key2 = (String) iterator2.next();
-					System.out.println(key2.toString());
-					//System.out.println(tokenobj.get(key2));
 					JSONTokener token2 = new JSONTokener(tokenobj.get(key2).toString());
 					JSONObject token2obj = new JSONObject(token2);
-					//System.out.println(token2obj.toString());
-					//System.out.println(token2obj.getInt("quantity"));
-					System.out.println(token2obj.get("recipe"));
-					ic.quantity = token2obj.getInt("quantity");
 					JSONArray recipeA = (JSONArray) token2obj.get("recipe");
-					// TODO JSONArray to Item[][]
+					Item[][] recipe = new Item[recipeA.length()][recipeA.getJSONArray(0).length()];
 					for (int i = 0; i < recipeA.length(); i++) {
 						for (int j = 0; j < recipeA.getJSONArray(0).length(); j++) {
-							// TODO
-							System.out.println(recipeA.getJSONArray(0).get(i));
+							String ItemName = (String) recipeA.getJSONArray(0).get(i);
+							System.out.println(ItemName);
+							recipe[i][j]=itemDB.getItem(ItemName);
 						}
 					}
-					
-					
-					//ic.recipe = recipe;
-					
-					//hashMap.put(key2.toString(), ic);
-					
-					//HashMap<String, InternalCraft> hashMap = (HashMap<String, InternalCraft>) iterator2.next();
-					
+					ic.quantity = token2obj.getInt("quantity");
+					ic.recipe = recipe;
+					hashMap.put(key2.toString(), ic);
+					loaded++;
 				}
-				
-				//craftDB.add((HashMap)tokenobj.toMap());
-				//craftDB.put(key, (HashMap)tokenobj.toMap());
 			}
 			this.craftDB.add(hashMap);
 		}
-		//System.out.println(craftDB.toString());
+		System.out.println("Crafts database: loaded "+loaded+" crafts");
 	}
 
 	public static Item craftExists(Craft combi) {
@@ -85,7 +74,4 @@ public final class CraftDB {
 		return null;
 	}
 	
-	public static void main(String[] args) throws IOException {
-		CraftDB craftDB = new CraftDB();
-	}
 }
