@@ -10,7 +10,7 @@ import model.ItemDB;
 import model.SlotsTable;
 import model.Slot;
 
-public class CraftingList extends Pane {
+public class ItemListUI extends Pane {
 	private static final int DISPLAY_ROWS = 9;
 	private static final int DISPLAY_COLS = 9;
 
@@ -18,11 +18,14 @@ public class CraftingList extends Pane {
 
 	private ScrollPane scrollPane;
 	private SlotsTable slots;
+	private BackgroundUI background;
 
-	public CraftingList(Controller controller) {
+	public ItemListUI(Controller controller) {
 		super();
 		nbRows = ItemDB.getItems().size() / DISPLAY_COLS + 1;
 		scrollPane = new ScrollPane();
+		background = new BackgroundUI();
+		this.getChildren().add(background);
 		
 		slots = new SlotsTable(nbRows, DISPLAY_COLS, controller);
 		slots.populate(ItemDB.getItems().values(), 1);
@@ -32,6 +35,7 @@ public class CraftingList extends Pane {
 				s.setContentUserGettable(false);
 			}
 
+		scrollPane.setPrefWidth(DISPLAY_COLS * Slot.SIZE + (DISPLAY_COLS - 1) * SlotsTable.GAP_SIZE);
 		scrollPane.setPrefHeight(DISPLAY_ROWS * Slot.SIZE + (DISPLAY_ROWS - 1) * SlotsTable.GAP_SIZE);
 		scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
@@ -50,6 +54,14 @@ public class CraftingList extends Pane {
 		});
 
 		this.getChildren().add(scrollPane);
+		this.setWidth(scrollPane.getPrefWidth());
+		this.setHeight(scrollPane.getPrefHeight());
+		
+		background.forceSize(this.getWidth(), this.getHeight());
+		this.updateGraphics();
 	}
-
+	
+	public void updateGraphics() {
+		background.updateGraphics();	
+	}
 }

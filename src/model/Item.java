@@ -2,7 +2,6 @@ package model;
 
 import java.io.InputStream;
 
-import _do_not_use.Slot;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

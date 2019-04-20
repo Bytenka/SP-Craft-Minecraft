@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import _do_not_use.Slot;
 import controller.Controller;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import view.CraftingTable;
@@ -19,6 +19,7 @@ public class Model {
 	public static final String ITEMS_PATH = "res/graphics/items/";
 	public static final String BLOCKS_PATH = "res/graphics/blocks/";
 	public static final String CSS_PATH = "res/css/";
+	public static final Image BACKGROUND_IMAGE = new Image("file:res/graphics/crafting_background.png");
 	public static final Color FONT_COLOR = Color.rgb(240, 240, 240);
 	public static Font FONT;
 

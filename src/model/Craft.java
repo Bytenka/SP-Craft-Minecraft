@@ -138,7 +138,6 @@ public class Craft {
 		else { // si tout est vide
 			this.tab = null;
 		}
-		
 	}
 	
 	public boolean isNull() {

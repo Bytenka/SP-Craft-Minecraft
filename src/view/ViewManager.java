@@ -18,13 +18,10 @@ import model.SlotsTable;
 
 // This class holds scenes, in case we want to expand the game
 public class ViewManager {
-	public static final int WIDTH = 1300;
-	public static final int HEIGHT = 900;
-
 	// Scenes
 	private Scene craftingScene;
 	private Group craftingLayout;
-	private CraftingList craftingList;
+	private ItemListUI craftingItemList;
 
 	public ViewManager(Model model, Controller controller) {
 		initCraftingScene(model, controller);
@@ -37,21 +34,24 @@ public class ViewManager {
 	private void initCraftingScene(Model model, Controller controller) {
 		// Init
 		craftingLayout = new Group();
-		craftingScene = new Scene(craftingLayout, WIDTH, HEIGHT);
-		craftingList = new CraftingList(controller);
+		craftingScene = new Scene(craftingLayout, Model.BACKGROUND_IMAGE.getWidth(), Model.BACKGROUND_IMAGE.getHeight());
+		craftingItemList = new ItemListUI(controller);
 
 		// Setting up the background
-		Image img = new Image("file:res/graphics/crafting_background.png");
-		ImagePattern backgroundImage = new ImagePattern(img, 0, 0, img.getWidth(), img.getHeight(), false);
-		craftingScene.setFill(backgroundImage);
+		Image img = Model.BACKGROUND_IMAGE;
+		ImagePattern bimg = new ImagePattern(img, 0, 0, img.getWidth(), img.getHeight(), false);
+		craftingScene.setFill(bimg);
 
-		CraftingUI ui = new CraftingUI(model, img);
-		ui.setLayoutX(craftingScene.getWidth() / 2 - ui.getWidth() / 2);
-		ui.setLayoutY(craftingScene.getHeight() / 2 - ui.getHeight() / 2);
-		ui.updateGraphics(img); // Because we moved the ui, we must reconstruct the background
-		craftingLayout.getChildren().add(ui);
+		CraftingUI craftingUI = new CraftingUI(model);
+		craftingUI.setLayoutX(craftingScene.getWidth() / 2 - craftingUI.getWidth() / 2);
+		craftingUI.setLayoutY(craftingScene.getHeight() / 2 - craftingUI.getHeight() / 2);
+		craftingUI.updateGraphics(); // Because we moved the ui, we must reconstruct the background
+		craftingLayout.getChildren().add(craftingUI);
 
-		craftingLayout.getChildren().add(craftingList);
+		craftingItemList.setLayoutX(craftingScene.getWidth() + BackgroundUI.BORDERS);
+		craftingItemList.setLayoutY(craftingScene.getHeight()/2 - craftingItemList.getHeight()/2);
+		craftingItemList.updateGraphics();
+		craftingLayout.getChildren().add(craftingItemList);
 
 		craftingLayout.getChildren().add(model.playerHand);
 
@@ -66,7 +66,5 @@ public class ViewManager {
 				controller.updatePlayerHandPosition(mouseEvent);
 			}
 		});
-
-
 	}
 }

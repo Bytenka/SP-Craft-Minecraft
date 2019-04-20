@@ -4,17 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import javax.swing.text.GapContent;
-
-import com.sun.corba.se.impl.interceptors.SlotTable;
-
 import controller.Controller;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import model.Craft;
 import model.Item;
-import model.ItemDB;
 import model.Slot;
 import model.SlotsTable;
 
