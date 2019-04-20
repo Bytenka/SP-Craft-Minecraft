@@ -49,6 +49,6 @@ public class Inventory extends SlotsTable {
 		this.setSlot(0, 6, ItemDB.getItem("beef_raw"), 1);
 		//this.setSlot(0, 7, ItemDB.get, quantity);
 		// -------------------- //
-
+		
 	}
 }
