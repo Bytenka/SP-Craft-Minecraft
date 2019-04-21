@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import controller.Controller;
 import javafx.scene.image.Image;
@@ -25,6 +26,7 @@ public class Model {
 
 	public ItemGraphicsFactory itemGraphicsFactory;
 	public ItemDB itemDB;
+	public CraftDB craftDB;
 	public Inventory inventory;
 	public CraftingTable craftingTable;
 	public PlayerHand playerHand;
@@ -50,6 +52,12 @@ public class Model {
 		this.itemDB = new ItemDB();
 		this.inventory = new Inventory(controller);
 		this.craftingTable = new CraftingTable(controller);
-		this.playerHand = new PlayerHand();
+		this.playerHand = new PlayerHand(controller);
+
+		try {
+			this.craftDB = new CraftDB();
+		} catch (IOException e) {
+			throw new RuntimeException("Failed to initialize the craft database: " + e.getMessage());
+		}
 	}
 }

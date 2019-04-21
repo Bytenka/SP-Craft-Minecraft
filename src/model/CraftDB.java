@@ -4,74 +4,107 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import javafx.util.Pair;
 
 public final class CraftDB {
 	
-	ArrayList<HashMap<String,InternalCraft>> craftDB;
+	private static HashMap<Item, InternalCraft>[] craftDB;
 	
-	private class InternalCraft{
-		@SuppressWarnings("unused")
+	private class InternalCraft {
+		Item item;
 		int quantity;
-		@SuppressWarnings("unused")
-		Item[][] recipe;
+		Craft recipe;
 	}
 	
-	@SuppressWarnings("static-access")
+	@SuppressWarnings("unchecked") // The cast is safe for this.craftDB
 	public CraftDB() throws IOException {
-		this.craftDB = new ArrayList<HashMap<String,InternalCraft>>();
-		// 0: 11
-		// 1: 22
-		// 2: 33
-		// 3: 12
-		// 4: 23
-		// 5: 13
-		// 6: 32
-		int loaded = 0;		// Number of Crafts loaded
-		File craftJson = new File("res/CraftDB.json");
-		InputStream is = new FileInputStream(craftJson);
-		JSONTokener tokens = new JSONTokener(is);
-		JSONObject craftDBJson = new JSONObject(tokens);
-		InternalCraft ic = new InternalCraft();
-		HashMap<String, InternalCraft> hashMap = null;
-		ItemDB itemDB = new ItemDB();
-		for (Iterator<String> iterator = craftDBJson.keys(); iterator.hasNext();) {
-			String key = iterator.next();
-			if (key.length()==2) {
-				JSONTokener token = new JSONTokener(craftDBJson.get(key).toString());
-				JSONObject tokenobj = new JSONObject(token);
-				hashMap = new HashMap<String, InternalCraft>();
-				for (Iterator<String> iterator2 = tokenobj.keys(); iterator2.hasNext();) {
-					String key2 = (String) iterator2.next();
-					JSONTokener token2 = new JSONTokener(tokenobj.get(key2).toString());
-					JSONObject token2obj = new JSONObject(token2);
-					JSONArray recipeA = (JSONArray) token2obj.get("recipe");
-					Item[][] recipe = new Item[recipeA.length()][recipeA.getJSONArray(0).length()];
-					for (int i = 0; i < recipeA.length(); i++) {
-						for (int j = 0; j < recipeA.getJSONArray(0).length(); j++) {
-							String ItemName = (String) recipeA.getJSONArray(0).get(i);
-							System.out.println(ItemName);
-							recipe[i][j]=itemDB.getItem(ItemName);
+		// Initialize the array
+		craftDB = (HashMap<Item, InternalCraft>[]) new HashMap[9];
+		for (int i = 0; i < craftDB.length; i++) {
+			craftDB[i] = new HashMap<Item, InternalCraft>();
+		}
+
+		int loaded = 0;		// Number of crafts loaded
+		InputStream jsonCraftsFile = new FileInputStream(new File("res/CraftDB.json"));
+		
+		JSONTokener tokens = new JSONTokener(jsonCraftsFile);
+		JSONObject topLevelDB = new JSONObject(tokens);
+		
+		// Get the top level objects, which are the length "11", "12" and so on
+		Iterator<String> lengthsIt= topLevelDB.keys();
+		while (lengthsIt.hasNext()) {
+			String lengthStr = lengthsIt.next();
+			JSONObject lengthObj = topLevelDB.getJSONObject(lengthStr);
+			
+			// Get the crafts in that object
+			Iterator<String> craftIt = lengthObj.keys();
+			while (craftIt.hasNext()) {
+				String craftStr = craftIt.next();
+				try {
+					JSONObject craft = lengthObj.getJSONObject(craftStr);
+					
+					InternalCraft internalCraft = new InternalCraft();
+					internalCraft.item = ItemDB.getItem(craftStr);;
+					internalCraft.quantity = craft.getInt("quantity");
+					
+					JSONArray recipeJSON = craft.getJSONArray("recipe");
+					Item[][] recipeTab = new Item[3][3];
+					
+					// Iterate on the 2D JSONArray to build internalCraft.recipe
+					for (int r = 0; r < recipeJSON.length(); r++) {
+						JSONArray rowArray = recipeJSON.getJSONArray(r);
+						
+						for (int c = 0; c < rowArray.length(); c++) {
+							String itemStr = rowArray.getString(c);
+							recipeTab[r][c] = itemStr.isEmpty() ? null : ItemDB.getItem(itemStr);
 						}
 					}
-					ic.quantity = token2obj.getInt("quantity");
-					ic.recipe = recipe;
-					hashMap.put(key2.toString(), ic);
+					
+					internalCraft.recipe = new Craft(recipeTab);
+					craftDB[stringSizeToIndex(lengthStr)].put(ItemDB.getItem(craftStr), internalCraft);		
 					loaded++;
+					
+				} catch (RuntimeException e) {
+					System.err.println("Unable to load craft for object " + craftStr + ": " + e.getMessage());
 				}
 			}
-			this.craftDB.add(hashMap);
 		}
+		
 		System.out.println("Crafts database: loaded "+loaded+" crafts");
 	}
 
-	public static Item craftExists(Craft combi) {
-		// TODO check if craft is in the json
+	public static Pair<Item, Integer> getItemFromCraft(Craft combi) {
+		if (!combi.isNull()) {
+			HashMap<Item, InternalCraft> hm = craftDB[stringSizeToIndex(combi.getSizeString())];
+	
+			for (InternalCraft c :  hm.values()) {
+				if (c.recipe.equals(combi))
+					return new Pair<>(c.item, c.quantity);
+			}
+		}
 		return null;
+	}
+	
+	private static int stringSizeToIndex(String size) {
+		switch (size) {
+			case "11": return 0; 
+			case "12": return 1; 
+			case "13": return 2; 
+			case "21": return 3; 
+			case "22": return 4; 
+			case "23": return 5; 
+			case "31": return 6; 
+			case "32": return 7; 
+			case "33": return 8;
+			default: throw new RuntimeException("No matching index for size " + size);
+		}
 	}
 	
 }

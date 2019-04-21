@@ -4,8 +4,6 @@ import controller.Controller;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import model.Craft;
-import model.Item;
 import model.Model;
 
 public class View extends Application {	
@@ -27,16 +25,6 @@ public class View extends Application {
 		ViewManager manager = new ViewManager(model, controller);
 		
 		primaryStage.setScene(manager.getMainScene());
-		
-		//Sneaky Main (Start)
-		Item[][] truc = new Item[][]{
-			{null, null, null},
-            {null, null, null},
-            {null, null, null}};
-        Craft allo = new Craft(truc);
-        System.out.println(allo);
-
-        //Sneaky Main (End)
 
 		primaryStage.show();
 	}

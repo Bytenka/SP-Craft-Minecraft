@@ -1,217 +1,776 @@
 {
 	"11": {
-		"planks_oak": [
-			["log_oak"]
-		],
-		"paper": [
-			["reeds"]
-		]
+		"planks_block": {
+			"quantity": 4,
+			"recipe": [
+				["log_block"]
+			]
+		},
+		"blaze_powder": {
+			"quantity": 2,
+			"recipe": [
+				["blaze_rod"]
+			]
+		},
+		"bone_meal": {
+			"quantity": 3,
+			"recipe": [
+				["bone"]
+			]
+		},
+		"gold_nugget": {
+			"quantity": 9,
+			"recipe": [
+				["gold_ingot"]
+			]
+		},
+		"iron_nugget": {
+			"quantity": 9,
+			"recipe": [
+				["iron_ingot"]
+			]
+		},
+		"iron_ingot": {
+			"quantity": 9,
+			"recipe": [
+				["iron_block"]
+			]
+		},
+		"gold_ingot": {
+			"quantity": 9,
+			"recipe": [
+				["gold_block"]
+			]
+		},
+		"diamond": {
+			"quantity": 9,
+			"recipe": [
+				["diamond_block"]
+			]
+		},
+		"redstone_dust": {
+			"quantity": 9,
+			"recipe": [
+				["redstone_block"]
+			]
+		},
+		"emerald": {
+			"quantity": 9,
+			"recipe": [
+				["emerald_block"]
+			]
+		},
+		"wheat": {
+			"quantity": 9,
+			"recipe": [
+				["hay_block"]
+			]
+		},
+		"glowstone_dust": {
+			"quantity": 4,
+			"recipe": [
+				["glowstone_block"]
+			]
+		},
 	},
 	
 	"12": {
-		"stick": [
-			["planks_oak"],
-			["planks_oak"]
-		]
+		"piston_block_sticky": {
+			"quantity": 1,
+			"recipe": [
+				["slimeball"],
+				["piston_block_sticky"]
+			]
+		},
+		"pumpkin_block_lit": {
+			"quantity": 1,
+			"recipe": [
+				["pumpkin_block_off"],
+				["torch"]
+			]
+		},
+		"torch": {
+			"quantity": 4,
+			"recipe": [
+				["coal"],
+				["stick"]
+			]
+		},
+	},
+	
+	"21": {
+		"ender_eye": {
+			"quantity": 1,
+			"recipe": [
+				["blaze_powder", "ender_pearl"]
+			]
+		},
+		"magma_cream": {
+			"quantity": 1,
+			"recipe": [
+				["blaze_powder", "slimeball"]
+			]
+		},
+		"flint_and_steel": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "flint"]
+			]
+		},
+		"pumpkin_block_off": {
+			"quantity": 1,
+			"recipe": [
+				["shears", "pumpkin_block"]
+			]
+		},
 	},
 	
 	"13": {
-		"arrow": [
-			["flint"], 
-			["stick"], 
-			["feather"]
-		],
-		"wood_shovel": [
-			["planks_oak"],
-			["stick"],
-			["stick"]
-		],
-		"stone_shovel": [
-			["cobblestone"],
-			["stick"],
-			["stick"]
-		],
-		"iron_shovel": [
-			["iron"],
-			["stick"],
-			["stick"]
-		],
-		"gold_shovel": [
-			["gold"],
-			["stick"],
-			["stick"]
-		],
-		"diamond_shovel": [
-			["diamond"],
-			["stick"],
-			["stick"]
-		]
+		"arrow": {
+			"quantity": 4,
+			"recipe": [
+				["flint"],
+				["stick"],
+				["feather"]
+			]
+		},
+		"wood_shovel": {
+			"quantity": 1,
+			"recipe": [
+				["planks_block"],
+				["stick"],
+				["stick"]
+			]
+		},
+		"stone_shovel": {
+			"quantity": 1,
+			"recipe": [
+				["cobblestone_block"],
+				["stick"],
+				["stick"]
+			]
+		},
+		"iron_shovel": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot"],
+				["stick"],
+				["stick"]
+			]
+		},
+		"gold_shovel": {
+			"quantity": 1,
+			"recipe": [
+				["gold_ingot"],
+				["stick"],
+				["stick"]
+			]
+		},
+		"diamond_shovel": {
+			"quantity": 1,
+			"recipe": [
+				["diamond"],
+				["stick"],
+				["stick"]
+			]
+		},
+		
+	},
+	
+	"31": {
+		"bread": {
+			"quantity": 1,
+			"recipe": [
+				["wheat", "wheat", "wheat"]
+			]
+		},
+		"cookie": {
+			"quantity": 8,
+			"recipe": [
+				["wheat", "cocoa_beans", "wheat"]
+			]
+		}
 	},
 	
 	"22": {
-		"crafting_table": [
-			["planks_oak", "planks_oak"],
-			["planks_oak", "planks_oak"]
-		]
+		"brick_block": {
+			"quantity": 1,
+			"recipe": [
+				["brick", "brick"],
+				["brick", "brick"]
+			]
+		},
+		"crafting_table_block": {
+			"quantity": 1,
+			"recipe": [
+				["planks_block", "planks_block"],
+				["planks_block", "planks_block"]
+			]
+		},
+		"glowstone_block": {
+			"quantity": 1,
+			"recipe": [
+				["glowstone_dust", "glowstone_dust"],
+				["glowstone_dust", "glowstone_dust"]
+			]
+		},
+		"shears": {
+			"quantity": 1,
+			"recipe": [
+				["", "iron_ingot"],
+				["iron_ingot", ""]
+			]
+		},
+		"sandstone_block_normal": {
+			"quantity": 1,
+			"recipe": [
+				["sand_block", "sand_block"],
+				["sand_block", "sand_block"]
+			]
+		},
+		"sandstone_block_smooth": {
+			"quantity": 4,
+			"recipe": [
+				["sandstone_block_normal", "sandstone_block_normal"],
+				["sandstone_block_normal", "sandstone_block_normal"]
+			]
+		},
+		"red_sandstone_block_normal": {
+			"quantity": 1,
+			"recipe": [
+				["red_sand_block", "red_sand_block"],
+				["red_sand_block", "red_sand_block"]
+			]
+		},
+		"red_sandstone_block_smooth": {
+			"quantity": 4,
+			"recipe": [
+				["red_sandstone_block_normal", "red_sandstone_block_normal"],
+				["red_sandstone_block_normal", "red_sandstone_block_normal"]
+			]
+		},
+		"stonebrick_block": {
+			"quantity": 4,
+			"recipe": [
+				["stone_block", "stone_block"],
+				["stone_block", "stone_block"]
+			]
+		},
 	},
 	
 	"23": {
-		"book_normal": [
-			["", "paper"],
-			["leather", "paper"],
-			["", "paper"]
-		],
-		"wood_axe": [
-			["planks_oak", "planks_oak"],
-			["planks_oak", "stick"],
-			["", "stick"]
-		],
-		"stone_axe": [
-			["cobblestone", "cobblestone"],
-			["cobblestone", "stick"],
-			["", "stick"]
-		],
-		"iron_axe": [
-			["iron", "iron"],
-			["iron", "stick"],
-			["", "stick"]
-		],
-		"gold_axe": [
-			["gold", "gold"],
-			["gold", "stick"],
-			["", "stick"]
-		],
-		"diamond_axe": [
-			["diamond", "diamond"],
-			["diamond", "stick"],
-			["", "stick"]
-		],
-		"wood_hoe": [
-			["planks_oak", "planks_oak"],
-			["", "stick"],
-			["", "stick"]
-		],
-		"stone_hoe": [
-			["cobblestone", "cobblestone"],
-			["", "stick"],
-			["", "stick"]
-		],
-		"iron_hoe": [
-			["iron", "iron"],
-			["", "stick"],
-			["", "stick"]
-		],
-		"gold_hoe": [
-			["gold", "gold"],
-			["", "stick"],
-			["", "stick"]
-		],
-		"diamond_hoe": [
-			["diamond", "diamond"],
-			["", "stick"],
-			["", "stick"]
-		]
+		"book_normal": {
+			"quantity": 1,
+			"recipe": [
+				["", "paper"],
+				["leather", "paper"],
+				["", "paper"]
+			]
+		},
+		"wood_axe": {
+			"quantity": 1,
+			"recipe": [
+				["planks_block", "planks_block"],
+				["planks_block", "stick"],
+				["", "stick"]
+			]
+		},
+		"stone_axe": {
+			"quantity": 1,
+			"recipe": [
+				["cobblestone_block", "cobblestone_block"],
+				["cobblestone_block", "stick"],
+				["", "stick"]
+			]
+		},
+		"iron_axe": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "iron_ingot"],
+				["iron_ingot", "stick"],
+				["", "stick"]
+			]
+		},
+		"gold_axe": {
+			"quantity": 1,
+			"recipe": [
+				["gold_ingot", "gold_ingot"],
+				["gold_ingot", "stick"],
+				["", "stick"]
+			]
+		},
+		"diamond_axe": {
+			"quantity": 1,
+			"recipe": [
+				["diamond", "diamond"],
+				["diamond", "stick"],
+				["", "stick"]
+			]
+		},
+		"stone_hoe": {
+			"quantity": 1,
+			"recipe": [
+				["cobblestone_block", "cobblestone_block"],
+				["", "stick"],
+				["", "stick"]
+			]
+		},
+		"iron_hoe": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "iron_ingot"],
+				["", "stick"],
+				["", "stick"]
+			]
+		},
+		"gold_hoe": {
+			"quantity": 1,
+			"recipe": [
+				["gold_ingot", "gold_ingot"],
+				["", "stick"],
+				["", "stick"]
+			]
+		},
+		"diamond_hoe": {
+			"quantity": 1,
+			"recipe": [
+				["diamond", "diamond"],
+				["", "stick"],
+				["", "stick"]
+			]
+		},
+		"door_wood": {
+			"quantity": 3,
+			"recipe": [
+				["planks_block", "planks_block"],
+				["planks_block", "planks_block"],
+				["planks_block", "planks_block"]
+			]
+		},
+		"door_iron": {
+			"quantity": 3,
+			"recipe": [
+				["iron_ingot", "iron_ingot"],
+				["iron_ingot", "iron_ingot"],
+				["iron_ingot", "iron_ingot"]
+			]
+		},
 	},
 	
 	"32": {
-		"leather_helmet": [
-			["leather", "leather", "leather"],
-			["leather", "", "leather"]
-		],
-		"iron_helmet": [
-			["iron", "iron", "iron"],
-			["iron", "", "iron"]
-		],
-		"gold_helmet": [
-			["gold", "gold", "gold"],
-			["gold", "", "gold"]
-		],
-		"diamond_helmet": [
-			["diamond", "diamond", "diamond"],
-			["diamond", "", "diamond"]
-		]
+		"bowl": {
+			"quantity": 4,
+			"recipe": [
+				["planks_block", "", "planks_block"],
+				["", "planks_block", ""]
+			]
+		},
+		"flower_pot": {
+			"quantity": 1,
+			"recipe": [
+				["brick", "", "brick"],
+				["", "brick", ""]
+			]
+		},
+		"potion_bottle_empty": {
+			"quantity": 3,
+			"recipe": [
+				["glass_block", "", "glass_block"],
+				["", "glass_block", ""]
+			]
+		},
+		"bucket_empty": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "", "iron_ingot"],
+				["", "iron_ingot", ""]
+			]
+		},
+		"brewing_stand": {
+			"quantity": 1,
+			"recipe": [
+				["", "blaze_rod", ""],
+				["cobblestone_block", "cobblestone_block", "cobblestone_block"]
+			]
+		},
+		"iron_boots": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "", "iron_ingot"],
+				["iron_ingot", "", "iron_ingot"]
+			]
+		},
+		"gold_boots": {
+			"quantity": 1,
+			"recipe": [
+				["gold_ingot", "", "gold_ingot"],
+				["gold_ingot", "", "gold_ingot"]
+			]
+		},
+		"diamond_boots": {
+			"quantity": 1,
+			"recipe": [
+				["diamond", "", "diamond"],
+				["diamond", "", "diamond"]
+			]
+		},
+		"iron_helmet": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "iron_ingot", "iron_ingot"],
+				["iron_ingot", "", "iron_ingot"]
+			]
+		},
+		"gold_helmet": {
+			"quantity": 1,
+			"recipe": [
+				["gold_ingot", "gold_ingot", "gold_ingot"],
+				["gold_ingot", "", "gold_ingot"]
+			]
+		},
+		"diamond_helmet": {
+			"quantity": 1,
+			"recipe": [
+				["diamond", "diamond", "diamond"],
+				["diamond", "", "diamond"]
+			]
+		},
+		"minecart_normal": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "", "iron_ingot"],
+				["iron_ingot", "iron_ingot", "iron_ingot"]
+			]
+		},
+		"wood_boat": {
+			"quantity": 1,
+			"recipe": [
+				["planks_block", "", "planks_block"],
+				["planks_block", "planks_block", "planks_block"]
+			]
+		},
 	},
 	
 	"33": {
-		"bow": [
-			["string", "stick", ""],
-			["string", "", "stick"],
-			["string", "stick", ""]
-		],
-		"leather_leggins": [
-			["leather", "leather", "leather"],
-			["leather", "", "leather"],
-			["leather", "", "leather"]
-		],
-		"iron_leggins": [
-			["iron", "iron", "iron"],
-			["iron", "", "iron"],
-			["iron", "", "iron"]
-		],
-		"gold_leggins": [
-			["gold", "gold", "gold"],
-			["gold", "", "gold"],
-			["gold", "", "gold"]
-		],
-		"diamond_leggins": [
-			["diamond", "diamond", "diamond"],
-			["diamond", "", "diamond"],
-			["diamond", "", "diamond"]
-		],
-		"leather_chestplate": [
-			["leather", "", "leather"],
-			["leather", "leather", "leather"],
-			["leather", "leather", "leather"]
-		],
-		"iron_chestplate": [
-			["iron", "", "iron"],
-			["iron", "iron", "iron"],
-			["iron", "iron", "iron"]
-		],
-		"gold_chestplate": [
-			["gold", "", "gold"],
-			["gold", "gold", "gold"],
-			["gold", "gold", "gold"]
-		],
-		"diamond_chestplate": [
-			["diamond", "", "diamond"],
-			["diamond", "diamond", "diamond"],
-			["diamond", "diamond", "diamond"]
-		],
-		"wood_pickaxe": [
-			["planks_oak", "planks_oak", "planks_oak"],
-			["", "stick", ""],
-			["", "stick", ""]			
-		],
-		"stone_pickaxe": [
-			["cobblestone", "cobblestone", "cobblestone"],
-			["", "stick", ""],
-			["", "stick", ""]			
-		],
-		"iron_pickaxe": [
-			["iron", "iron", "iron"],
-			["", "stick", ""],
-			["", "stick", ""]			
-		],
-		"gold_pickaxe": [
-			["gold", "gold", "gold"],
-			["", "stick", ""],
-			["", "stick", ""]			
-		],
-		"diamond_pickaxe": [
-			["diamond", "diamond", "diamond"],
-			["", "stick", ""],
-			["", "stick", ""]			
-		],
-		"chest": [
-			["planks_oak", "planks_oak", "planks_oak"],
-			["planks_oak", "", "planks_oak"],
-			["planks_oak", "planks_oak", "planks_oak"]
-		],
-		"book_shelf": [
-			["planks_oak", "planks_oak", "planks_oak"],
-			["book_normal", "book_normal", "book_normal"],
-			["planks_oak", "planks_oak", "planks_oak"]
-		]
+		"apple_golden": {
+			"quantity": 1,
+			"recipe": [
+				["gold_nugget", "gold_nugget", "gold_nugget"],
+				["gold_nugget", "apple", "gold_nugget"],
+				["gold_nugget", "gold_nugget", "gold_nugget"]
+			]
+		},
+		"carrot_golden": {
+			"quantity": 1,
+			"recipe": [
+				["gold_nugget", "gold_nugget", "gold_nugget"],
+				["gold_nugget", "carrot", "gold_nugget"],
+				["gold_nugget", "gold_nugget", "gold_nugget"]
+			]
+		},
+		"bow": {
+			"quantity": 1,
+			"recipe": [
+				["", "stick", "string"],
+				["stick", "", "string"],
+				["", "stick", "string"]
+			]
+		},
+		"cake": {
+			"quantity": 1,
+			"recipe": [
+				["bucket_milk", "bucket_milk", "bucket_milk"],
+				["sugar", "egg", "sugar"],
+				["wheat", "wheat", "wheat"]
+			]
+		},
+		"cauldron": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "", "iron_ingot"],
+				["iron_ingot", "", "iron_ingot"],
+				["iron_ingot", "iron_ingot", "iron_ingot"]
+			]
+		},
+		"clock": {
+			"quantity": 1,
+			"recipe": [
+				["", "gold_ingot", ""],
+				["gold_ingot", "redstone_dust", "gold_ingot"],
+				["", "gold_ingot", ""]
+			]
+		},
+		"compass": {
+			"quantity": 1,
+			"recipe": [
+				["", "iron_ingot", ""],
+				["iron_ingot", "redstone_dust", "iron_ingot"],
+				["", "iron_ingot", ""]
+			]
+		},
+		"iron_chestplate": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "", "iron_ingot"],
+				["iron_ingot", "iron_ingot", "iron_ingot"],
+				["iron_ingot", "iron_ingot", "iron_ingot"]
+			]
+		},
+		"gold_chestplate": {
+			"quantity": 1,
+			"recipe": [
+				["gold_ingot", "", "gold_ingot"],
+				["gold_ingot", "gold_ingot", "gold_ingot"],
+				["gold_ingot", "gold_ingot", "gold_ingot"]
+			]
+		},
+		"diamond_chestplate": {
+			"quantity": 1,
+			"recipe": [
+				["diamond", "", "diamond"],
+				["diamond", "diamond", "diamond"],
+				["diamond", "diamond", "diamond"]
+			]
+		},
+		"iron_leggings": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "iron_ingot", "iron_ingot"],
+				["iron_ingot", "", "iron_ingot"],
+				["iron_ingot", "", "iron_ingot"]
+			]
+		},
+		"gold_leggings": {
+			"quantity": 1,
+			"recipe": [
+				["gold_ingot", "gold_ingot", "gold_ingot"],
+				["gold_ingot", "", "gold_ingot"],
+				["gold_ingot", "", "gold_ingot"]
+			]
+		},
+		"diamond_leggings": {
+			"quantity": 1,
+			"recipe": [
+				["diamond", "diamond", "diamond"],
+				["diamond", "", "diamond"],
+				["diamond", "", "diamond"]
+			]
+		},
+		"gold_horse_armor": {
+			"quantity": 1,
+			"recipe": [
+				["gold_ingot", "", "gold_ingot"],
+				["gold_ingot", "gold_ingot", "gold_ingot"],
+				["gold_ingot", "", "gold_ingot"]
+			]
+		},
+		"diamond_horse_armor": {
+			"quantity": 1,
+			"recipe": [
+				["diamond", "", "diamond"],
+				["diamond", "diamond", "diamond"],
+				["diamond", "", "diamond"]
+			]
+		},
+		"wood_pickaxe": {
+			"quantity": 1,
+			"recipe": [
+				["planks_block", "planks_block", "planks_block"],
+				["", "stick", ""],
+				["", "stick", ""]
+			]
+		},
+		"stone_pickaxe": {
+			"quantity": 1,
+			"recipe": [
+				["cobblestone_block", "cobblestone_block", "cobblestone_block"],
+				["", "stick", ""],
+				["", "stick", ""]
+			]
+		},
+		"iron_pickaxe": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "iron_ingot", "iron_ingot"],
+				["", "stick", ""],
+				["", "stick", ""]
+			]
+		},
+		"gold_pickaxe": {
+			"quantity": 1,
+			"recipe": [
+				["gold_ingot", "gold_ingot", "gold_ingot"],
+				["", "stick", ""],
+				["", "stick", ""]
+			]
+		},
+		"diamond_pickaxe": {
+			"quantity": 1,
+			"recipe": [
+				["diamond", "diamond", "diamond"],
+				["", "stick", ""],
+				["", "stick", ""]
+			]
+		},
+		"fishing_rod": {
+			"quantity": 1,
+			"recipe": [
+				["", "", "planks_block"],
+				["", "planks_block", "string"],
+				["planks_block", "", "string"]
+			]
+		},
+		"gold_ingot": {
+			"quantity": 1,
+			"recipe": [
+				["gold_nugget", "gold_nugget", "gold_nugget"],
+				["gold_nugget", "gold_nugget", "gold_nugget"],
+				["gold_nugget", "gold_nugget", "gold_nugget"]
+			]
+		},
+		"iron_ingot": {
+			"quantity": 1,
+			"recipe": [
+				["iron_nugget", "iron_nugget", "iron_nugget"],
+				["iron_nugget", "iron_nugget", "iron_nugget"],
+				["iron_nugget", "iron_nugget", "iron_nugget"]
+			]
+		},
+		"item_frame": {
+			"quantity": 1,
+			"recipe": [
+				["stick", "stick", "stick"],
+				["stick", "leather", "stick"],
+				["stick", "stick", "stick"]
+			]
+		},
+		"lead": {
+			"quantity": 2,
+			"recipe": [
+				["string", "string", ""],
+				["string", "slimeball", ""],
+				["", "", "string"]
+			]
+		},
+		"bookshelf_block": {
+			"quantity": 1,
+			"recipe": [
+				["planks_block", "planks_block", "planks_block"],
+				["book_normal", "book_normal", "book_normal"],
+				["planks_block", "planks_block", "planks_block"]
+			]
+		},
+		"furnace_block": {
+			"quantity": 1,
+			"recipe": [
+				["cobblestone_block", "cobblestone_block", "cobblestone_block"],
+				["cobblestone_block", "", "cobblestone_block"],
+				["cobblestone_block", "cobblestone_block", "cobblestone_block"]
+			]
+		},
+		"dispenser_block": {
+			"quantity": 1,
+			"recipe": [
+				["cobblestone_block", "cobblestone_block", "cobblestone_block"],
+				["cobblestone_block", "bow", "cobblestone_block"],
+				["cobblestone_block", "redstone_dust", "cobblestone_block"]
+			]
+		},
+		"dropper_block": {
+			"quantity": 1,
+			"recipe": [
+				["cobblestone_block", "cobblestone_block", "cobblestone_block"],
+				["cobblestone_block", "", "cobblestone_block"],
+				["cobblestone_block", "redstone_dust", "cobblestone_block"]
+			]
+		},
+		"iron_block": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "iron_ingot", "iron_ingot"],
+				["iron_ingot", "iron_ingot", "iron_ingot"],
+				["iron_ingot", "iron_ingot", "iron_ingot"]
+			]
+		},
+		"gold_block": {
+			"quantity": 1,
+			"recipe": [
+				["gold_ingot", "gold_ingot", "gold_ingot"],
+				["gold_ingot", "gold_ingot", "gold_ingot"],
+				["gold_ingot", "gold_ingot", "gold_ingot"]
+			]
+		},
+		"diamond_block": {
+			"quantity": 1,
+			"recipe": [
+				["diamond", "diamond", "diamond"],
+				["diamond", "diamond", "diamond"],
+				["diamond", "diamond", "diamond"]
+			]
+		},
+		"redstone_block": {
+			"quantity": 1,
+			"recipe": [
+				["redstone_dust", "redstone_dust", "redstone_dust"],
+				["redstone_dust", "redstone_dust", "redstone_dust"],
+				["redstone_dust", "redstone_dust", "redstone_dust"]
+			]
+		},
+		"emerald_block": {
+			"quantity": 1,
+			"recipe": [
+				["emerald", "emerald", "emerald"],
+				["emerald", "emerald", "emerald"],
+				["emerald", "emerald", "emerald"]
+			]
+		},
+		"hay_block": {
+			"quantity": 1,
+			"recipe": [
+				["wheat", "wheat", "wheat"],
+				["wheat", "wheat", "wheat"],
+				["wheat", "wheat", "wheat"]
+			]
+		},
+		"jukebox_block": {
+			"quantity": 1,
+			"recipe": [
+				["planks_block", "planks_block", "planks_block"],
+				["planks_block", "diamond", "planks_block"],
+				["planks_block", "planks_block", "planks_block"]
+			]
+		},
+		"noteblock_block": {
+			"quantity": 1,
+			"recipe": [
+				["planks_block", "planks_block", "planks_block"],
+				["planks_block", "redstone_dust", "planks_block"],
+				["planks_block", "planks_block", "planks_block"]
+			]
+		},
+		"redstone_lamp_block": {
+			"quantity": 1,
+			"recipe": [
+				["", "redstone_dust", ""],
+				["redstone_dust", "glowstone_block", "redstone_dust"],
+				["", "redstone_dust", ""]
+			]
+		},
+		"piston_block": {
+			"quantity": 1,
+			"recipe": [
+				["planks_block", "planks_block", "planks_block"],
+				["cobblestone_block", "iron_ingot", "cobblestone_block"],
+				["cobblestone_block", "redstone_dust", "cobblestone_block"]
+			]
+		},
+		"tnt_block": {
+			"quantity": 1,
+			"recipe": [
+				["gunpowder", "sand_block", "gunpowder"],
+				["sand_block", "gunpowder", "sand_block"],
+				["gunpowder", "sand_block", "gunpowder"]
+			]
+		},
 	}
 }

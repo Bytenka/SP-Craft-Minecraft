@@ -1,8 +1,5 @@
 package model;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 import controller.Controller;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -40,21 +37,21 @@ public class SlotsTable extends Pane {
 		this.getChildren().add(layout);
 	}
 
-	public void setSlot(int row, int col, Item item, int quantity) {
-		if (!slots[row][col].putItem(item, quantity))
-			throw new RuntimeException("Unable to set slot [" + row + ", " + col + "]");
+	public boolean putSlot(int row, int col, Item item, int quantity) {	
+		return slots[row][col].put(item, quantity);
 	}
 
-	// Return true if every item has found a place
-	public boolean populate(Collection<Item> items, int quantityForEach) {
-		Iterator<Item> i = items.iterator();
+	// Return true if every item has found a place. Will override any item already present
+	public boolean populate(String[] items, int quantityForEach) {
+		int counter = 0;
 		for (Slot[] sl : slots)
 			for (Slot s : sl) {
-				if (i.hasNext())
-					s.replaceItem(i.next(), quantityForEach);
+				if (counter < items.length) {
+					s.set(ItemDB.getItem(items[counter++]), quantityForEach);
+				}
 			}
 
-		return !i.hasNext();
+		return counter < items.length-1;
 	}
 
 	public Slot getSlot(int row, int col) {

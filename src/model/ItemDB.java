@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.function.Function;
 
 public final class ItemDB {
 	private static HashMap<String, Item> items;
@@ -126,7 +125,7 @@ public final class ItemDB {
 	public static Item getItem(String name) {
 		Item i = items.get(name);
 		if (i == null)
-			throw new RuntimeException("Item \"" + name + "\" does not exist!");
+			throw new RuntimeException("Object \"" + name + "\" does not exist!");
 		return i;
 	}
 }

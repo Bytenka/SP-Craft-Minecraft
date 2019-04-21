@@ -1,30 +1,30 @@
 package view;
 
+import controller.Controller;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
-import model.Item;
 import model.Model;
 import model.Slot;
 
 public class PlayerHand extends Pane {
-	private Item item;
-	private int quantity;
-	private DrawableItem itemGraphics;
+	public Slot slot;
 
+	// Hovering text
 	private Pane itemDesc;
 	private Rectangle itemDescBG;
 	private Text itemDescText;
+	
+	private Controller controller;
 
-	public PlayerHand() {
+	public PlayerHand(Controller controller) {
 		super();
+		this.slot = new Slot(controller);
 		this.setMouseTransparent(true);
-		itemGraphics = new DrawableItem();
-		this.getChildren().add(itemGraphics);
-		clear();
+		this.getChildren().add(slot.getDrawableItem());
 
 		itemDesc = new Pane();
 		itemDescText = new Text();
@@ -54,44 +54,6 @@ public class PlayerHand extends Pane {
 		this.getChildren().add(itemDesc);
 	}
 
-	public Item getItem() {
-		return this.item;
-	}
-
-	public int getQuantity() {
-		return this.quantity;
-	}
-
-	public boolean isEmpty() {
-		return this.item == null;
-	}
-
-	public void clear() {
-		this.item = null;
-		this.quantity = 0;
-		itemGraphics.clear();
-	}
-
-	public void addQuantity(int quantity) {
-		if (quantity < 0)
-			throw new RuntimeException("Cannot add negative quantity");
-		this.setQuantity(this.quantity + quantity);
-	}
-
-	public void removeQuantity(int quantity) {
-		if (this.quantity > quantity)
-			this.setQuantity(this.quantity - quantity);
-		else
-			this.clear();
-	}
-
-	public void replaceItem(Item item, int quantity) {
-		if (item == null || quantity <= 0)
-			throw new RuntimeException("Could not replace item with " + item.toString() + " | " + quantity);
-
-		this.setItem(item);
-		this.setQuantity(quantity);
-	}
 
 	public void setHoveringText(String name) {
 		itemDescText.setText(name);
@@ -102,18 +64,6 @@ public class PlayerHand extends Pane {
 		itemDesc.setVisible(value);
 	}
 
-	// Does not make any checks
-	private void setItem(Item item) {
-		this.item = item;
-		itemGraphics.set(this.item);
-	}
-
-	// Does not make any checks
-	private void setQuantity(int quantity) {
-		this.quantity = quantity;
-		itemGraphics.setQuantity(quantity);
-	}
-
 	public void updatePosition(MouseEvent event) {
 		updatePosition(event.getX(), event.getY());
 	}
@@ -121,12 +71,5 @@ public class PlayerHand extends Pane {
 	public void updatePosition(double posX, double posY) {
 		this.setLayoutX(posX - (Slot.SIZE / 2));
 		this.setLayoutY(posY - (Slot.SIZE / 2));
-	}
-
-	@Override
-	public String toString() {
-		if (this.item != null)
-			return this.item.toString() + ": " + this.quantity;
-		return "none";
 	}
 }

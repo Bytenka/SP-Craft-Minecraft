@@ -4,6 +4,7 @@ import javafx.scene.input.MouseEvent;
 import model.Item;
 import model.Model;
 import model.Slot;
+import model.Slot.SlotType;
 import view.View;
 
 public class Controller {
@@ -35,62 +36,82 @@ public class Controller {
 	}
 
 	public void slotClicked(Slot slot, MouseEvent event) {
+		Slot ph = model.playerHand.slot;
+
 		// Switch on the buttons
 		switch (event.getButton()) {
 		case PRIMARY: {
-			// Take or release a stack of items
 			if (!slot.isEmpty()) {
-				if (!model.playerHand.isEmpty()) {
-					if (slot.isContentUserSettable()) {
-						// Attempt stacking
-						if (slot.putItem(model.playerHand.getItem(), model.playerHand.getQuantity()))
-							model.playerHand.clear();
+				if (!ph.isEmpty()) {
+					// SWAP ITEMS
+					if (slot.getType() == SlotType.REGULAR) {
+						if (slot.put(ph.getItem(), ph.getQuantity())) // Attempt stacking in the slot
+							ph.clear();
 						else {
-							if (slot.isContentUserGettable()) {
-								// Swap
-								Item tempI = model.playerHand.getItem();
-								int tempQ = model.playerHand.getQuantity();
+							// PERFORM SWAP
+							Item tempI = ph.getItem();
+							int tempQ = ph.getQuantity();
 
-								model.playerHand.replaceItem(slot.getItem(), slot.getQuantity());
-								slot.replaceItem(tempI, tempQ);
-							}
+							ph.set(slot.getItem(), slot.getQuantity());
+							slot.set(tempI, tempQ);
 						}
+					} else if (slot.getType() == SlotType.CRAFT_RESULT) {
+						if (ph.put(slot.getItem(), slot.getQuantity())) { // Attempt stacking in the player hand
+							slot.clear();
+							craftResultPickedUpAction();
+						}
+						// else, we can't do anything because the slot can't be set
 					}
 				} else {
-					if (slot.isContentUserGettable()) {
-						model.playerHand.replaceItem(slot.getItem(), slot.getQuantity());
-						slot.clear();
+					// GET ITEM FROM SLOT
+					if (slot.getType() == SlotType.REGULAR || slot.getType() == SlotType.CRAFT_RESULT) {
+						if (ph.put(slot.getItem(), slot.getQuantity()))
+							slot.clear();
+
+						if (slot.getType() == SlotType.CRAFT_RESULT)
+							craftResultPickedUpAction();
 					}
 				}
-			} else if (!model.playerHand.isEmpty()) {
-				if (slot.isContentUserSettable()) {
-					slot.replaceItem(model.playerHand.getItem(), model.playerHand.getQuantity());
-					model.playerHand.clear();
+			} else if (!ph.isEmpty()) {
+				// PUT ITEM IN SLOT
+				if (slot.getType() == SlotType.REGULAR) {
+					if (slot.put(ph.getItem(), ph.getQuantity()))
+						ph.clear();
 				}
 			}
+			// ELSE NOTHING HAPPENS
 			break;
 		}
 
 		case SECONDARY: {
-			if (!model.playerHand.isEmpty()) {
-				if (slot.putItem(model.playerHand.getItem(), 1))
-					model.playerHand.removeQuantity(1);
+			if (!ph.isEmpty()) {
+				if (slot.put(ph.getItem(), 1))
+					ph.remove(1);
 			} else if (!slot.isEmpty()) {
-				if (slot.isContentUserGettable()) {
+				if (slot.getType() == SlotType.REGULAR || slot.getType() == SlotType.CRAFT_RESULT) {
 					int q = slot.getQuantity() / 2;
-					model.playerHand.replaceItem(slot.getItem(), slot.getQuantity() - q);
-					slot.removeQuantity(slot.getQuantity() - q);
+					ph.set(slot.getItem(), slot.getQuantity() - q);
+					slot.remove(slot.getQuantity() - q);
+
+					if (slot.getType() == SlotType.CRAFT_RESULT)
+						craftResultPickedUpAction();
 				}
 			}
 			break;
 		}
+
 		default:
 			break;
 		}
 
-		// Check if a craft was made. There is no need to update
-		// the table if the slot can't change anything
-		if (slot.isContentUserGettable() || slot.isContentUserSettable())
-			model.craftingTable.update();
+		model.craftingTable.update();
+	}
+
+	private void craftResultPickedUpAction() {
+		// Remove one item on every slot
+		for (Slot[] st : model.craftingTable.getCraftingBench().getSlots())
+			for (Slot s : st) {
+				s.remove(1);
+			}
 	}
 }

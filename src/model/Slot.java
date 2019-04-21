@@ -11,17 +11,25 @@ import view.DrawableItem;
 public class Slot extends Group {
 	public static final int SIZE = 50;
 
-	private boolean contentUserSettable;
-	private boolean contentUserGettable;
+	public static enum SlotType {
+		ITEM_LIST, // Will respond to click events, but the item can't be changed by the user
+		CRAFT_RESULT, // User can pick up the item, but can't put anything
+		REGULAR // User can pick up and put items
+	};
+
 	private Item item;
 	private int quantity;
 	private Button button;
 	private DrawableItem itemGraphics;
-
+	private SlotType type;
+	
 	public Slot(Controller controller) {
+		this(SlotType.REGULAR, controller);
+	}
+
+	public Slot(SlotType type, Controller controller) {
 		super();
-		contentUserSettable = true;
-		contentUserGettable = true;
+		this.type = type;
 
 		itemGraphics = new DrawableItem();
 		this.getChildren().add(itemGraphics);
@@ -34,6 +42,18 @@ public class Slot extends Group {
 		clear();
 
 		initializeEventHandelers(controller);
+	}
+	
+	public DrawableItem getDrawableItem() {
+		return this.itemGraphics;
+	}
+
+	public void setType(SlotType type) {
+		this.type = type;
+	}
+	
+	public SlotType getType() {
+		return this.type;
 	}
 
 	public Item getItem() {
@@ -48,81 +68,71 @@ public class Slot extends Group {
 		return this.item == null;
 	}
 
-	public void clear() {
-		this.item = null;
-		this.quantity = 0;
-		itemGraphics.clear();
-	}
-
-	public void setContentUserSettable(boolean value) {
-		contentUserSettable = value;
-	}
-
-	public boolean isContentUserSettable() {
-		return contentUserSettable;
-	}
-
-	public void setContentUserGettable(boolean value) {
-		contentUserGettable = value;
-	}
-
-	public boolean isContentUserGettable() {
-		return contentUserGettable;
-	}
-
-	public boolean putItem(Item item, int quantity) {
-		if (contentUserSettable && item != null && quantity > 0) {
+	// Support stacking if possible
+	public boolean put(Item item, int quantity) {
+		if (type == SlotType.REGULAR && item != null && quantity > 0) {
 			if (this.isEmpty()) {
 				this.setItem(item);
 				this.setQuantity(quantity);
 				return true;
 			} else if (item.equals(this.item)) {
-				this.addQuantity(quantity);
+				this.setQuantity(this.quantity + quantity);
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public void addQuantity(int quantity) {
-		if (quantity < 0)
-			throw new RuntimeException("Cannot add negative quantity");
-		this.setQuantity(this.quantity + quantity);
+	public boolean add(int quantity) {
+		if (type == SlotType.REGULAR) {
+			if (quantity < 0)
+				throw new RuntimeException("Cannot add negative quantity");
+			this.setQuantity(this.quantity + quantity);
+			return true;
+		}
+		return false;
 	}
 
-	public void removeQuantity(int quantity) {
-		if (this.quantity > quantity)
-			this.setQuantity(this.quantity - quantity);
-		else
+	public boolean remove(int quantity) {
+		if (type == SlotType.REGULAR || type == SlotType.CRAFT_RESULT) {
+			if (this.quantity > quantity)
+				this.setQuantity(this.quantity - quantity);
+			else
+				this.clear();
+			return true;
+		}
+		return false;
+	}
+
+	public boolean removeAll() {
+		if (type == SlotType.REGULAR || type == SlotType.CRAFT_RESULT) {
 			this.clear();
+			return true;
+		}
+		return false;
 	}
 
-	// Should be used if !contentUserModifiable to set the slot's content
-	public void replaceItem(Item item, int quantity) {
-		if (item == null || quantity <= 0)
-			throw new RuntimeException("Could not replace item with " + item.toString() + " | " + quantity);
-
+	// ---------------------------------------------------------- //
+	
+	public void set(Item item, int quantity) {
 		this.setItem(item);
 		this.setQuantity(quantity);
 	}
 
-	// Does not make any checks
-	private void setItem(Item item) {
+	public void setItem(Item item) {
 		this.item = item;
 		itemGraphics.set(this.item);
 	}
 
-	// Does not make any checks
-	private void setQuantity(int quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 		itemGraphics.setQuantity(quantity);
 	}
 
-	@Override
-	public String toString() {
-		if (this.item != null)
-			return this.item.toString() + ": " + this.quantity;
-		return "none";
+	public void clear() {
+		this.item = null;
+		this.quantity = 0;
+		itemGraphics.clear();
 	}
 
 	private void initializeEventHandelers(Controller controller) {
@@ -158,5 +168,12 @@ public class Slot extends Group {
 				controller.slotMouseExited(Slot.this, event);
 			}
 		});
+	}
+	
+	@Override
+	public String toString() {
+		if (this.item != null)
+			return this.item.toString() + ": " + this.quantity;
+		return "none";
 	}
 }

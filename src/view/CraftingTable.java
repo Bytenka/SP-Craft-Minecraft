@@ -8,14 +8,18 @@ import controller.Controller;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
 import model.Craft;
+import model.CraftDB;
 import model.Item;
+import model.ItemDB;
 import model.Slot;
+import model.Slot.SlotType;
 import model.SlotsTable;
 
 public class CraftingTable extends Pane {
 	// Where we make the crafts
-	private class CraftingBench extends SlotsTable {
+	public class CraftingBench extends SlotsTable {
 		private static final int ROWS = 3;
 		public static final int COLS = 3;
 
@@ -33,8 +37,7 @@ public class CraftingTable extends Pane {
 	
 	public CraftingTable(Controller controller) {
 		craftingBench = new CraftingBench(controller);
-		craftResult = new Slot(controller);
-		craftResult.setContentUserSettable(false);
+		craftResult = new Slot(SlotType.CRAFT_RESULT, controller);
 		
 		this.setWidth(2 + craftingBench.getWidth() + 2 + ARROW_SPACE + 6 + Slot.SIZE + 6);
 		this.setHeight(2 + craftingBench.getHeight() + 2);
@@ -66,15 +69,27 @@ public class CraftingTable extends Pane {
 		Item[][] tabItems = new Item[CraftingBench.ROWS][CraftingBench.COLS];
 		for (int i = 0; i < CraftingBench.ROWS; i++) {
 			for (int j = 0; j < CraftingBench.COLS; j++) {
-				tabItems[i][j]=craftingBench.getSlot(i, j).getItem();
+				tabItems[i][j] = craftingBench.getSlot(i, j).getItem();
 			}
 		}
-		Craft tabCraft = new Craft(tabItems);
-		System.out.println(tabCraft);
+
+		Pair<Item, Integer> item = CraftDB.getItemFromCraft(new Craft(tabItems));
+		if (item != null) 
+			this.setResult(item.getKey(), item.getValue());
+		 else 
+			this.clearResult();
 	}
 	
-	public void setResult(Item item) {
-		craftResult.replaceItem(item, 1);;
+	public CraftingBench getCraftingBench() {
+		return this.craftingBench;
+	}
+	
+	public void setResult(Item item, int quantity) {
+		craftResult.set(item, quantity);
+	}
+	
+	public void clearResult() {
+		craftResult.clear();
 	}
 	
 	public Item getResult() {

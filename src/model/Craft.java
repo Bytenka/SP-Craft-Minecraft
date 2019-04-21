@@ -2,7 +2,7 @@ package model;
 
 public class Craft {
 
-	Item[][] tab;
+	private Item[][] tab;
 	
 	public Craft (Item[][] arg) {
 		// TODO shrink
@@ -28,7 +28,7 @@ public class Craft {
 			
 			// Colonne de droite vide
 			if (rightColEmpty) {
-				System.out.println("right col empty");
+				//System.out.println("right col empty");
 				Item[][] newItem = new Item[3][2];
 				for (int row = 0; row < 3; row++) {
 					for (int col = 0; col < 2; col++) {
@@ -40,7 +40,7 @@ public class Craft {
 			
 			// Colonne du milieu vide
 			if ((middleColEmpty && leftColEmpty) || (middleColEmpty && rightColEmpty)) {
-				System.out.println("middle col empty");
+				//System.out.println("middle col empty");
 				int nCol = item[0].length;
 				Item[][] newItem = new Item[3][nCol-1];
 				for (int row = 0; row < 3; row++) {
@@ -58,7 +58,7 @@ public class Craft {
 			
 			// Colonne de gauche vide
 			if (leftColEmpty) {
-				System.out.println("left col empty");
+				//System.out.println("left col empty");
 				int nCol = item[0].length;
 				Item[][] newItem = new Item[3][nCol-1];
 				for (int row = 0; row < 3; row++) {
@@ -90,7 +90,7 @@ public class Craft {
 			
 			// Ligne du bas
 			if (bottomRowEmpty) {
-				System.out.println("bottom row empty");
+				//System.out.println("bottom row empty");
 				Item[][] newItem = new Item[2][nCol];
 				for (int row = 0; row < 2; row++) {
 					for (int col = 0; col < nCol; col++) {
@@ -102,7 +102,7 @@ public class Craft {
 			
 			// Ligne du milieu
 			if ((middleRowEmpty && topRowEmpty) || (middleRowEmpty && bottomRowEmpty)) {
-				System.out.println("middle row empty");
+				//System.out.println("middle row empty");
 				int nRow = item.length;
 				Item[][] newItem = new Item[nRow-1][nCol];
 				for (int row = 0; row < nRow; row++) {
@@ -120,7 +120,7 @@ public class Craft {
 			
 			// Ligne du haut
 			if (topRowEmpty) {
-				System.out.println("top row empty");
+				//System.out.println("top row empty");
 				int nRow = item.length;
 				Item[][] newItem = new Item[nRow-1][nCol];
 				for (int row = 0; row < nRow; row++) {
@@ -142,6 +142,26 @@ public class Craft {
 	
 	public boolean isNull() {
 		return (this.tab == null);
+	}
+	
+	// Returns an empty string if the craft contains nothing
+	public String getSizeString() {
+		return this.isNull() ? "" : "" + tab[0].length + tab.length;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Craft c = (Craft) obj;
+
+		if (!this.getSizeString().equals(c.getSizeString()))
+			return false;
+		
+		for (int i = 0; i < c.tab.length; i++) 
+			for (int j = 0; j < c.tab[i].length; j++) {
+				if (this.tab[i][j] != c.tab[i][j])
+					return false;
+		}
+		return true;
 	}
 	
 	public String toString() {

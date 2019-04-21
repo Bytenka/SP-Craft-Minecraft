@@ -2,9 +2,7 @@ package model;
 
 import java.io.InputStream;
 
-import javafx.scene.Group;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Item {
 	private String name;

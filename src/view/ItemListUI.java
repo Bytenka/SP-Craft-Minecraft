@@ -1,5 +1,7 @@
 package view;
 
+import java.util.TreeSet;
+
 import controller.Controller;
 import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
@@ -7,8 +9,9 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import model.ItemDB;
-import model.SlotsTable;
 import model.Slot;
+import model.Slot.SlotType;
+import model.SlotsTable;
 
 public class ItemListUI extends Pane {
 	private static final int DISPLAY_ROWS = 9;
@@ -28,11 +31,16 @@ public class ItemListUI extends Pane {
 		this.getChildren().add(background);
 		
 		slots = new SlotsTable(nbRows, DISPLAY_COLS, controller);
-		slots.populate(ItemDB.getItems().values(), 1);
+		
+		// Sort the keys in the HashMap and feed them to the SlotsTable
+		TreeSet<String> sortedTreeSet = new TreeSet<>(ItemDB.getItems().keySet());
+		String[] sortedList = new String[sortedTreeSet.size()];
+		sortedTreeSet.toArray(sortedList);
+		slots.populate(sortedList, 1);
+		
 		for(Slot[] sl : slots.getSlots())
 			for(Slot s : sl) {
-				s.setContentUserSettable(false);
-				s.setContentUserGettable(false);
+				s.setType(SlotType.REGULAR);
 			}
 
 		scrollPane.setPrefWidth(DISPLAY_COLS * Slot.SIZE + (DISPLAY_COLS - 1) * SlotsTable.GAP_SIZE);

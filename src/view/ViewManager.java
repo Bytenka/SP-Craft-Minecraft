@@ -2,19 +2,14 @@ package view;
 
 import java.io.File;
 
+import controller.Controller;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
-
-import controller.Controller;
 import model.Model;
-import model.SlotsTable;
 
 // This class holds scenes, in case we want to expand the game
 public class ViewManager {
@@ -34,7 +29,8 @@ public class ViewManager {
 	private void initCraftingScene(Model model, Controller controller) {
 		// Init
 		craftingLayout = new Group();
-		craftingScene = new Scene(craftingLayout, Model.BACKGROUND_IMAGE.getWidth(), Model.BACKGROUND_IMAGE.getHeight());
+		craftingScene = new Scene(craftingLayout, Model.BACKGROUND_IMAGE.getWidth(),
+				Model.BACKGROUND_IMAGE.getHeight());
 		craftingItemList = new ItemListUI(controller);
 
 		// Setting up the background
@@ -49,7 +45,7 @@ public class ViewManager {
 		craftingLayout.getChildren().add(craftingUI);
 
 		craftingItemList.setLayoutX(craftingScene.getWidth() + BackgroundUI.BORDERS);
-		craftingItemList.setLayoutY(craftingScene.getHeight()/2 - craftingItemList.getHeight()/2);
+		craftingItemList.setLayoutY(craftingScene.getHeight() / 2 - craftingItemList.getHeight() / 2);
 		craftingItemList.updateGraphics();
 		craftingLayout.getChildren().add(craftingItemList);
 
