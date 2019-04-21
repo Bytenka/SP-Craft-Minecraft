@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
 public class SlotsTable extends Pane {
-	public static final int GAP_SIZE = 5;
+	public static final int GAP_SIZE = 4;
 
 	private TilePane layout;
 	protected Slot[][] slots;

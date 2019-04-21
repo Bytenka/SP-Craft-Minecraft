@@ -5,14 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import controller.Controller;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
 import model.ItemDB;
-import model.Slot;
 import model.SlotsTable;
 
 public class Inventory extends SlotsTable {
@@ -27,16 +22,18 @@ public class Inventory extends SlotsTable {
 		try {
 			Image bi = new Image(
 					new FileInputStream(new File(BACKGROUND_IMAGE_PATH)), 
-					this.getWidth(),
-					this.getHeight(), 
+					this.getWidth()+4,
+					this.getHeight()+4, 
 					false, 
 					false
 			);
 			backgroundImage = new ImageView(bi);
+			backgroundImage.setLayoutX(-2);
+			backgroundImage.setLayoutY(-2);
 			this.getChildren().add(0, backgroundImage); // Adds behind everything
 			
 		} catch (FileNotFoundException e) {
-			System.err.println("Could not set inventory background");
+			System.err.println("Could not set inventory backgr5ound");
 		}
 
 		// TODO Modify/remove that

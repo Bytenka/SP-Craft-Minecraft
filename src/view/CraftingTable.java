@@ -25,7 +25,7 @@ public class CraftingTable extends Pane {
 	}
 	
 	private static final String BACKGROUND_IMAGE_PATH = "res/graphics/ui/crafting_table.png";
-	private static final int ARROW_SIZE = 45;
+	private static final int ARROW_SPACE = 100;
 	
 	private CraftingBench craftingBench;
 	private Slot craftResult;
@@ -36,8 +36,8 @@ public class CraftingTable extends Pane {
 		craftResult = new Slot(controller);
 		craftResult.setContentUserSettable(false);
 		
-		this.setWidth(craftingBench.getWidth() + ARROW_SIZE + Slot.SIZE + ARROW_SIZE + SlotsTable.GAP_SIZE * 3);
-		this.setHeight(craftingBench.getHeight());
+		this.setWidth(2 + craftingBench.getWidth() + 2 + ARROW_SPACE + 6 + Slot.SIZE + 6);
+		this.setHeight(2 + craftingBench.getHeight() + 2);
 		
 		try {
 			Image bi = new Image(
@@ -48,13 +48,14 @@ public class CraftingTable extends Pane {
 					false
 			);
 			backgroundImage = new ImageView(bi);
+			backgroundImage.setLayoutX(-2);
+			backgroundImage.setLayoutY(-2);
 			this.getChildren().add(0, backgroundImage); // Adds behind everything
-			
 		} catch (FileNotFoundException e) {
 			System.err.println("Could not set inventory background");
 		}
 		
-		craftResult.setLayoutX(260);
+		craftResult.setLayoutX(craftingBench.getWidth() + 2 + ARROW_SPACE + 6);
 		craftResult.setLayoutY(Slot.SIZE + SlotsTable.GAP_SIZE);
 		
 		this.getChildren().add(craftingBench);
