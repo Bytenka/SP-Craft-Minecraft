@@ -53,6 +53,13 @@ public class SlotsTable extends Pane {
 
 		return counter < items.length-1;
 	}
+	
+	public void clear() {
+		for (Slot[] sl : slots)
+			for (Slot s : sl) {
+				s.clear();
+			}
+	}
 
 	public Slot getSlot(int row, int col) {
 		return slots[row][col];

@@ -12,7 +12,7 @@ public class Slot extends Group {
 	public static final int SIZE = 50;
 
 	public static enum SlotType {
-		ITEM_LIST, // Will respond to click events, but the item can't be changed by the user
+		LIST, // Will respond to click events, but the item can't be changed by the user
 		CRAFT_RESULT, // User can pick up the item, but can't put anything
 		REGULAR // User can pick up and put items
 	};

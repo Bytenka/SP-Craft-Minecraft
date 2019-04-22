@@ -7,7 +7,9 @@ import java.io.FileNotFoundException;
 import controller.Controller;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import model.Item;
 import model.ItemDB;
+import model.Slot;
 import model.SlotsTable;
 
 public class Inventory extends SlotsTable {
@@ -18,34 +20,55 @@ public class Inventory extends SlotsTable {
 	private ImageView backgroundImage;
 
 	public Inventory(Controller controller) {
-		super(ROWS, COLS, controller);		
+		super(ROWS, COLS, controller);
 		try {
-			Image bi = new Image(
-					new FileInputStream(new File(BACKGROUND_IMAGE_PATH)), 
-					this.getWidth()+4,
-					this.getHeight()+4, 
-					false, 
-					false
-			);
+			Image bi = new Image(new FileInputStream(new File(BACKGROUND_IMAGE_PATH)), this.getWidth() + 4,
+					this.getHeight() + 4, false, false);
 			backgroundImage = new ImageView(bi);
 			backgroundImage.setLayoutX(-2);
 			backgroundImage.setLayoutY(-2);
 			this.getChildren().add(0, backgroundImage); // Adds behind everything
-			
+
 		} catch (FileNotFoundException e) {
 			System.err.println("Could not set inventory backgr5ound");
 		}
 
 		// TODO Modify/remove that
-		this.putSlot(0, 0, ItemDB.getItem("diamond"), 64);
-		this.putSlot(0, 1, ItemDB.getItem("potion_bottle_empty"), 5);
-		this.putSlot(0, 2, ItemDB.getItem("ender_eye"), 40);
-		this.putSlot(0, 3, ItemDB.getItem("planks_block"), 82);
-		this.putSlot(0, 4, ItemDB.getItem("emerald_block"), 5);
-		this.putSlot(0, 5, ItemDB.getItem("stick"), 3);
-		this.putSlot(0, 6, ItemDB.getItem("string"), 3);
-		//this.setSlot(0, 7, ItemDB.get, quantity);
+		this.autoPutSlot(ItemDB.getItem("log_block"), 64);
+		this.autoPutSlot(ItemDB.getItem("diamond"), 40);
+		this.autoPutSlot(ItemDB.getItem("gold_ingot"), 200);
+		this.autoPutSlot(ItemDB.getItem("planks_block"), 82);
+		this.autoPutSlot(ItemDB.getItem("iron_ingot"), 60);
+		this.autoPutSlot(ItemDB.getItem("stick"), 3);
+		this.autoPutSlot(ItemDB.getItem("string"), 3);
+		this.autoPutSlot(ItemDB.getItem("stick"), 9);
+		// this.setSlot(0, 7, ItemDB.get, quantity);
 		// -------------------- //
-		
+
+	}
+
+	public boolean autoPutSlot(Item item, int quantity) {
+		Slot stackHere = null;
+		Slot emptyHere = null;
+
+		for (Slot[] sl : this.getSlots())
+			for (Slot s : sl) {
+				if (stackHere == null && s.getItem() == item)
+					stackHere = s;
+
+				else if (emptyHere == null && s.isEmpty())
+					emptyHere = s;
+			}
+
+		if (stackHere != null) {
+			if (stackHere.put(item, quantity))
+				return true;
+		}
+
+		if (emptyHere != null)
+			if (emptyHere.put(item, quantity))
+				return true;
+
+		return false;
 	}
 }

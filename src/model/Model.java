@@ -30,6 +30,7 @@ public class Model {
 	public Inventory inventory;
 	public CraftingTable craftingTable;
 	public PlayerHand playerHand;
+	public boolean shiftIsDown = false;
 
 	private View view = null;
 	private Controller controller = null;

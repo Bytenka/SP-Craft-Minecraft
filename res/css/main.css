@@ -23,3 +23,17 @@
 .itemList {
     -fx-background-color: transparent;
 }
+
+.itemListSearchBar {
+    -fx-text-fill: white;
+    -fx-prompt-text: white;
+    -fx-highlight-fill: white;
+    -fx-highlight-text-fill: blue;
+    -fx-display-caret: true;
+    
+    -fx-background-color: rgba(100, 100, 100, 0.5);
+    -fx-border-style: none;
+}
+
+.itemListSearchBar:focused {
+}

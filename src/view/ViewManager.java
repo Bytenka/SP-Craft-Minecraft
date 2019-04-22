@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import model.Model;
@@ -44,7 +45,7 @@ public class ViewManager {
 		craftingUI.updateGraphics(); // Because we moved the ui, we must reconstruct the background
 		craftingLayout.getChildren().add(craftingUI);
 
-		craftingItemList.setLayoutX(craftingScene.getWidth() + BackgroundUI.BORDERS);
+		craftingItemList.setLayoutX(craftingScene.getWidth() + BackgroundUI.BORDERS - 700);
 		craftingItemList.setLayoutY(craftingScene.getHeight() / 2 - craftingItemList.getHeight() / 2);
 		craftingItemList.updateGraphics();
 		craftingLayout.getChildren().add(craftingItemList);
@@ -61,6 +62,10 @@ public class ViewManager {
 			public void handle(MouseEvent mouseEvent) {
 				controller.updatePlayerHandPosition(mouseEvent);
 			}
+		});
+		
+		craftingScene.addEventHandler(KeyEvent.ANY, (key) -> {
+			model.shiftIsDown =  key.isShiftDown();
 		});
 	}
 }

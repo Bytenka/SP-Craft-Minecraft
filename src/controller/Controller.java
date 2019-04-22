@@ -37,7 +37,120 @@ public class Controller {
 
 	public void slotClicked(Slot slot, MouseEvent event) {
 		Slot ph = model.playerHand.slot;
+		
+		switch (event.getButton()) {
+		case PRIMARY: {
+			if (slot.getType() == SlotType.CRAFT_RESULT) {
+				if (model.shiftIsDown) {
+					Item currentlyCraftedItem = slot.getItem();
+					while (slot.getItem() != null && currentlyCraftedItem == slot.getItem() && model.inventory.autoPutSlot(slot.getItem(), slot.getQuantity())) {
+						craftResultPickedUpAction();
+						model.craftingTable.update();
+					}
+				} else {
+					if (!slot.isEmpty()) {
+						Item tempI = slot.getItem();
+						int tempQ = slot.getQuantity();
+						
+						if (slot.removeAll()) {
+							if (ph.put(tempI, tempQ)) {
+								craftResultPickedUpAction();
+								model.craftingTable.update();							
+							} else slot.set(tempI, tempQ); // Revert the changes made by slot.removeAll(). // TODO fix bad design
+						}
+					}
+				}
+				
+			} else {
+				if (!slot.isEmpty()) {
+					Item tempI = slot.getItem();
+					int tempQ = slot.getQuantity();
+					
+					if (!ph.isEmpty()) {
+						// STACK
+						if (slot.put(ph.getItem(), ph.getQuantity()))
+							ph.clear();
+						
+						// SWAP
+						else if (slot.removeAll()) {
+							if (slot.put(ph.getItem(), ph.getQuantity()))
+								ph.set(tempI, tempQ);
+							else slot.set(tempI, tempQ); // Revert the changes made by slot.removeAll(). // TODO fix bad design
+						} 
+					} else {
+						if (slot.removeAll()) ph.set(tempI, tempQ);
+					}
+					
+				} else if (!ph.isEmpty()) {					
+					if (slot.put(ph.getItem(), ph.getQuantity()))
+						ph.clear();
+				}
+				
+				model.craftingTable.update();
+			}
+			
+			break;
+		}
+		
+		case SECONDARY: {
+			if (slot.getType() == SlotType.LIST) {
+				int q = model.shiftIsDown ? 64 : 1;
+				model.inventory.autoPutSlot(slot.getItem(), q);
+				
+			} else { 
+				if (!ph.isEmpty()) {
+					if (slot.put(ph.getItem(), 1))
+						ph.remove(1);
+				} else if (!slot.isEmpty()) {
+					Item tempI = slot.getItem();
+					int tempQ = slot.getQuantity();
+					int q = slot.getQuantity() / 2;
+					
+					if (slot.remove(tempQ - q))
+						ph.set(tempI, tempQ - q);
+				}
+			}
+			model.craftingTable.update();
+			break;
+		}
+		
+		default:
+			break;
+		}
+		
+		/*
+		switch (event.getButton()) {
+		case PRIMARY: {
+			switch (slot.getType()) {
+			case REGULAR: {
+				
+				break;
+			}
+				
+			case CRAFT_RESULT: {
+				
+				break;
+			}
+				
+			case LIST: {
+				
+				break;
+			}
+				
 
+			default:
+				break;
+			}
+			
+			break;
+		}
+
+		default:
+			break;
+		}
+		*/
+
+		/*
 		// Switch on the buttons
 		switch (event.getButton()) {
 		case PRIMARY: {
@@ -56,7 +169,15 @@ public class Controller {
 							slot.set(tempI, tempQ);
 						}
 					} else if (slot.getType() == SlotType.CRAFT_RESULT) {
-						if (ph.put(slot.getItem(), slot.getQuantity())) { // Attempt stacking in the player hand
+						if (model.shiftIsDown) {
+							Item craftedItem = slot.getItem(); // While the item is still the same
+							while (craftedItem == slot.getItem() && model.inventory.autoPutSlot(slot.getItem(), slot.getQuantity())) {
+								slot.remove(slot.getQuantity());
+								craftResultPickedUpAction();
+								model.craftingTable.update();
+							}
+							
+						} else if (ph.put(slot.getItem(), slot.getQuantity())) { // Attempt stacking in the player hand
 							slot.clear();
 							craftResultPickedUpAction();
 						}
@@ -64,6 +185,17 @@ public class Controller {
 					}
 				} else {
 					// GET ITEM FROM SLOT
+					if (slot.getType() == SlotType.CRAFT_RESULT) {
+						if (model.shiftIsDown) {
+							Item craftedItem = slot.getItem();
+							while (craftedItem == slot.getItem() && model.inventory.autoPutSlot(slot.getItem(), slot.getQuantity())) {
+								slot.remove(slot.getQuantity());
+								craftResultPickedUpAction();
+								model.craftingTable.update();
+							}
+						}
+					}
+					
 					if (slot.getType() == SlotType.REGULAR || slot.getType() == SlotType.CRAFT_RESULT) {
 						if (ph.put(slot.getItem(), slot.getQuantity()))
 							slot.clear();
@@ -105,6 +237,7 @@ public class Controller {
 		}
 
 		model.craftingTable.update();
+		*/
 	}
 
 	private void craftResultPickedUpAction() {

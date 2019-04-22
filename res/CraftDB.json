@@ -96,6 +96,14 @@
 				["stick"]
 			]
 		},
+		
+		"stick": {
+			"quantity": 4,
+			"recipe": [
+				["planks_block"],
+				["planks_block"]
+			]
+		},
 	},
 	
 	"21": {

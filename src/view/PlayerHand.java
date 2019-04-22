@@ -9,6 +9,7 @@ import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 import model.Model;
 import model.Slot;
+import model.Slot.SlotType;
 
 public class PlayerHand extends Pane {
 	public Slot slot;
@@ -22,7 +23,7 @@ public class PlayerHand extends Pane {
 
 	public PlayerHand(Controller controller) {
 		super();
-		this.slot = new Slot(controller);
+		this.slot = new Slot(SlotType.REGULAR, controller);
 		this.setMouseTransparent(true);
 		this.getChildren().add(slot.getDrawableItem());
 
