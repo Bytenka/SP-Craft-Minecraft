@@ -149,6 +149,10 @@ public class Craft {
 		return this.isNull() ? "" : "" + tab[0].length + tab.length;
 	}
 	
+	public Item[][] getItemTab() {
+		return tab;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		Craft c = (Craft) obj;

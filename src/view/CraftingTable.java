@@ -12,7 +12,6 @@ import javafx.util.Pair;
 import model.Craft;
 import model.CraftDB;
 import model.Item;
-import model.ItemDB;
 import model.Slot;
 import model.Slot.SlotType;
 import model.SlotsTable;
@@ -38,7 +37,7 @@ public class CraftingTable extends Pane {
 	public CraftingTable(Controller controller) {
 		craftingBench = new CraftingBench(controller);
 		craftResult = new Slot(SlotType.CRAFT_RESULT, controller);
-		craftResult.set(ItemDB.getItem("bucket_empty"), 5);
+		//craftResult.set(ItemDB.getItem("bucket_empty"), 5);
 		
 		this.setWidth(2 + craftingBench.getWidth() + 2 + ARROW_SPACE + 6 + Slot.SIZE + 6);
 		this.setHeight(2 + craftingBench.getHeight() + 2);
@@ -95,5 +94,13 @@ public class CraftingTable extends Pane {
 	
 	public Item getResult() {
 		return craftResult.getItem();
+	}
+	
+	public boolean isBenchEmpty() {
+		for (int i = 0; i < CraftingBench.ROWS; i++)
+			for (int j = 0; j < CraftingBench.ROWS; j++)
+				if (!craftingBench.getSlot(i, j).isEmpty())
+					return false;
+		return true;
 	}
 }

@@ -60,6 +60,12 @@
 				["emerald_block"]
 			]
 		},
+		"coal": {
+			"quantity": 9,
+			"recipe": [
+				["coal_block"]
+			]
+		},
 		"wheat": {
 			"quantity": 9,
 			"recipe": [
@@ -738,6 +744,14 @@
 				["wheat", "wheat", "wheat"],
 				["wheat", "wheat", "wheat"],
 				["wheat", "wheat", "wheat"]
+			]
+		},
+		"coal_block": {
+			"quantity": 1,
+			"recipe": [
+				["coal", "coal", "coal"],
+				["coal", "coal", "coal"],
+				["coal", "coal", "coal"]
 			]
 		},
 		"jukebox_block": {

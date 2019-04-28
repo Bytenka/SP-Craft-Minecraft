@@ -25,13 +25,13 @@ public class Model {
 	public static Font FONT;
 
 	public ItemGraphicsFactory itemGraphicsFactory;
-	public ItemDB itemDB;
-	public CraftDB craftDB;
 	public Inventory inventory;
 	public CraftingTable craftingTable;
 	public PlayerHand playerHand;
 	public boolean shiftIsDown = false;
 
+	private ItemDB itemDB;
+	private CraftDB craftDB;
 	private View view = null;
 	private Controller controller = null;
 

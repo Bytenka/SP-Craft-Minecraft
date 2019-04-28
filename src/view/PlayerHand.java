@@ -47,7 +47,6 @@ public class PlayerHand extends Pane {
 		itemDescText.setFill(Model.FONT_COLOR);
 		itemDescText.setLayoutX(Slot.SIZE / 2 + 30);
 		itemDescText.setLayoutY(Slot.SIZE / 2 + 40);
-		setHoveringText("Mange tes morts");
 		setHoveringTextVisible(false);
 		
 		itemDesc.getChildren().add(itemDescText);

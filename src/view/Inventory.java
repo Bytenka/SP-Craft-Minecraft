@@ -34,15 +34,16 @@ public class Inventory extends SlotsTable {
 		}
 
 		// TODO Modify/remove that
-		this.autoPutSlot(ItemDB.getItem("log_block"), 64);
-		this.autoPutSlot(ItemDB.getItem("diamond"), 40);
-		this.autoPutSlot(ItemDB.getItem("gold_ingot"), 200);
-		this.autoPutSlot(ItemDB.getItem("planks_block"), 82);
-		this.autoPutSlot(ItemDB.getItem("iron_ingot"), 60);
-		this.autoPutSlot(ItemDB.getItem("stick"), 3);
-		this.autoPutSlot(ItemDB.getItem("string"), 3);
-		this.autoPutSlot(ItemDB.getItem("stick"), 9);
-		// this.setSlot(0, 7, ItemDB.get, quantity);
+		this.autoPutSlot(ItemDB.getItem("stick"), 12);
+		this.autoPutSlot(ItemDB.getItem("string"), 12);
+		this.autoPutSlot(ItemDB.getItem("planks_block"), 64);
+		this.autoPutSlot(ItemDB.getItem("iron_ingot"), 54);
+		this.autoPutSlot(ItemDB.getItem("redstone_dust"), 40);
+		this.autoPutSlot(ItemDB.getItem("gold_ingot"), 9);
+		this.autoPutSlot(ItemDB.getItem("carrot"), 3);
+		this.autoPutSlot(ItemDB.getItem("blaze_rod"), 9);
+		this.autoPutSlot(ItemDB.getItem("cobblestone_block"), 200);
+		this.autoPutSlot(ItemDB.getItem("diamond"), 84);
 		// -------------------- //
 
 	}
@@ -70,5 +71,32 @@ public class Inventory extends SlotsTable {
 				return true;
 
 		return false;
+	}
+	
+	public boolean autoRemoveSlot(Item item, int quantity) {
+		int qToGo = quantity;
+		for (Slot[] sl : this.getSlots())
+			for (Slot s : sl) {
+				if (s.getItem() == item) {
+					if (qToGo >  s.getQuantity()) {
+						qToGo -= s.getQuantity();
+						s.removeAll();
+					} else {
+						s.remove(qToGo);
+						return true;
+					}
+				}
+			}
+		return false;
+	}
+	
+	public int getQuantityOfItem(Item item) {
+		int q = 0;
+		for (Slot[] sl : this.getSlots())
+			for (Slot s : sl) {
+				if (s.getItem() == item)
+					q += s.getQuantity();
+			}
+		return q;
 	}
 }

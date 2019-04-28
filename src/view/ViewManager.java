@@ -40,12 +40,14 @@ public class ViewManager {
 		craftingScene.setFill(bimg);
 
 		CraftingUI craftingUI = new CraftingUI(model);
-		craftingUI.setLayoutX(craftingScene.getWidth() / 2 - craftingUI.getWidth() / 2);
+		//craftingUI.setLayoutX(craftingScene.getWidth() / 2 - craftingUI.getWidth() / 2);
+		craftingUI.setLayoutX(craftingScene.getWidth() / 2 - craftingUI.getWidth() - BackgroundUI.BORDERS - 10);
 		craftingUI.setLayoutY(craftingScene.getHeight() / 2 - craftingUI.getHeight() / 2);
 		craftingUI.updateGraphics(); // Because we moved the ui, we must reconstruct the background
 		craftingLayout.getChildren().add(craftingUI);
 
-		craftingItemList.setLayoutX(craftingScene.getWidth() + BackgroundUI.BORDERS - 700);
+		//craftingItemList.setLayoutX(craftingScene.getWidth() + BackgroundUI.BORDERS - 500);
+		craftingItemList.setLayoutX(craftingScene.getWidth()/2 + BackgroundUI.BORDERS + 10);
 		craftingItemList.setLayoutY(craftingScene.getHeight() / 2 - craftingItemList.getHeight() / 2);
 		craftingItemList.updateGraphics();
 		craftingLayout.getChildren().add(craftingItemList);

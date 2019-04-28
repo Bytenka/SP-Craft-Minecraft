@@ -21,6 +21,7 @@ public class Slot extends Group {
 	private int quantity;
 	private Button button;
 	private DrawableItem itemGraphics;
+	private DrawableItem ghostItem;
 	private SlotType type;
 	
 	public Slot(Controller controller) {
@@ -30,7 +31,11 @@ public class Slot extends Group {
 	public Slot(SlotType type, Controller controller) {
 		super();
 		this.type = type;
-
+		
+		ghostItem = new DrawableItem();
+		ghostItem.setOpacity(0.5);
+		this.getChildren().add(ghostItem);
+		
 		itemGraphics = new DrawableItem();
 		this.getChildren().add(itemGraphics);
 
@@ -119,14 +124,23 @@ public class Slot extends Group {
 		this.setQuantity(quantity);
 	}
 
-	public void setItem(Item item) {
+	private void setItem(Item item) {
 		this.item = item;
 		itemGraphics.set(this.item);
 	}
 
-	public void setQuantity(int quantity) {
+	private void setQuantity(int quantity) {
 		this.quantity = quantity;
 		itemGraphics.setQuantity(quantity);
+	}
+	
+	public void setGhostItem(Item item) {
+		ghostItem.set(item);
+		ghostItem.setQuantity(1);
+	}
+	
+	public void clearGhostItem() {
+		ghostItem.clear();
 	}
 
 	public void clear() {

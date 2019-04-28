@@ -10,6 +10,7 @@ import javafx.event.EventType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
@@ -38,15 +39,7 @@ public class ItemListUI extends Pane {
 		this.getChildren().add(background);
 		
 		slots = new SlotsTable(nbRows, DISPLAY_COLS, controller);
-		
-		/*
-		// Sort the keys in the HashMap and feed them to the SlotsTable
-		TreeSet<String> sortedTreeSet = new TreeSet<>(ItemDB.getItems().keySet());
-		String[] sortedList = new String[sortedTreeSet.size()];
-		sortedTreeSet.toArray(sortedList);
-		slots.populate(sortedList, 1);
-		*/
-		updateScrollPane("");
+		updateScrollPaneContent("");
 		
 		for(Slot[] sl : slots.getSlots())
 			for(Slot s : sl) {
@@ -81,7 +74,15 @@ public class ItemListUI extends Pane {
 		searchBar.setFont(Model.FONT);
 		searchBar.getStyleClass().add("itemListSearchBar");
 		searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
-		    updateScrollPane(newValue.toLowerCase());
+			updateScrollPaneContent(newValue.toLowerCase());
+		});
+		searchBar.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+			// Clear box when ESCAPE is pressed
+			@Override
+			public void handle(KeyEvent event) {
+				if (event.getCode() == KeyCode.ESCAPE)
+					searchBar.clear();
+			}
 		});
 		
 		this.getChildren().add(searchBar);
@@ -98,7 +99,7 @@ public class ItemListUI extends Pane {
 		background.updateGraphics();	
 	}
 	
-	private void updateScrollPane(String filter) {
+	private void updateScrollPaneContent(String filter) {
 		TreeSet<String> sortedTreeSet = new TreeSet<>(ItemDB.getItems().keySet());
 		
 		if (!filter.isEmpty())
@@ -107,6 +108,7 @@ public class ItemListUI extends Pane {
 		String[] sortedList = new String[sortedTreeSet.size()];
 		sortedTreeSet.toArray(sortedList);
 		slots.clear();
-		slots.populate(sortedList, 1);		
+		slots.populate(sortedList, 1);
+		scrollPane.setVvalue(0);
 	}
 }
