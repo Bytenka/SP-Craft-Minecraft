@@ -56,8 +56,8 @@ public class ViewManager {
 
 		// Load graphics from CSS
 		File styleCSS = new File(Model.CSS_PATH + "main.css");
-		craftingScene.getStylesheets().add("file:///" + styleCSS.getAbsolutePath().replace("\\", "/"));
-
+		craftingScene.getStylesheets().add("file:///" + styleCSS.getAbsolutePath().replace("\\", "/").replace(" ", "%20"));
+		//craftingScene.getStylesheets().add(getClass().getResource("main.css").toExternalForm());
 		// Forward events
 		craftingScene.addEventFilter(MouseEvent.MOUSE_MOVED, new EventHandler<MouseEvent>() {
 			@Override
