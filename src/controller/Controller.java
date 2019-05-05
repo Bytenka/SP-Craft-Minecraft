@@ -1,13 +1,8 @@
 package controller;
 
-import java.util.Arrays;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 import javafx.scene.input.MouseEvent;
 import model.CraftDB;
 import model.Item;
-import model.ItemDB;
 import model.Model;
 import model.Slot;
 import model.Slot.SlotType;
@@ -120,7 +115,6 @@ public class Controller {
 										break out;
 									}
 								}
-							System.out.println(i1 + ", " + j1);
 						}
 
 						// Columns-Lines
@@ -132,7 +126,6 @@ public class Controller {
 										break out;
 									}
 								}
-							System.out.println(i2 + ", " + j2);
 						}
 
 					} else {
@@ -236,74 +229,9 @@ public class Controller {
 		default:
 			break;
 		}
-
-		/*
-		 * switch (event.getButton()) { case PRIMARY: { switch (slot.getType()) { case
-		 * REGULAR: {
-		 * 
-		 * break; }
-		 * 
-		 * case CRAFT_RESULT: {
-		 * 
-		 * break; }
-		 * 
-		 * case LIST: {
-		 * 
-		 * break; }
-		 * 
-		 * 
-		 * default: break; }
-		 * 
-		 * break; }
-		 * 
-		 * default: break; }
-		 */
-
-		/*
-		 * // Switch on the buttons switch (event.getButton()) { case PRIMARY: { if
-		 * (!slot.isEmpty()) { if (!ph.isEmpty()) { // SWAP ITEMS if (slot.getType() ==
-		 * SlotType.REGULAR) { if (slot.put(ph.getItem(), ph.getQuantity())) // Attempt
-		 * stacking in the slot ph.clear(); else { // PERFORM SWAP Item tempI =
-		 * ph.getItem(); int tempQ = ph.getQuantity();
-		 * 
-		 * ph.set(slot.getItem(), slot.getQuantity()); slot.set(tempI, tempQ); } } else
-		 * if (slot.getType() == SlotType.CRAFT_RESULT) { if (model.shiftIsDown) { Item
-		 * craftedItem = slot.getItem(); // While the item is still the same while
-		 * (craftedItem == slot.getItem() && model.inventory.autoPutSlot(slot.getItem(),
-		 * slot.getQuantity())) { slot.remove(slot.getQuantity());
-		 * craftResultPickedUpAction(); model.craftingTable.update(); }
-		 * 
-		 * } else if (ph.put(slot.getItem(), slot.getQuantity())) { // Attempt stacking
-		 * in the player hand slot.clear(); craftResultPickedUpAction(); } // else, we
-		 * can't do anything because the slot can't be set } } else { // GET ITEM FROM
-		 * SLOT if (slot.getType() == SlotType.CRAFT_RESULT) { if (model.shiftIsDown) {
-		 * Item craftedItem = slot.getItem(); while (craftedItem == slot.getItem() &&
-		 * model.inventory.autoPutSlot(slot.getItem(), slot.getQuantity())) {
-		 * slot.remove(slot.getQuantity()); craftResultPickedUpAction();
-		 * model.craftingTable.update(); } } }
-		 * 
-		 * if (slot.getType() == SlotType.REGULAR || slot.getType() ==
-		 * SlotType.CRAFT_RESULT) { if (ph.put(slot.getItem(), slot.getQuantity()))
-		 * slot.clear();
-		 * 
-		 * if (slot.getType() == SlotType.CRAFT_RESULT) craftResultPickedUpAction(); } }
-		 * } else if (!ph.isEmpty()) { // PUT ITEM IN SLOT if (slot.getType() ==
-		 * SlotType.REGULAR) { if (slot.put(ph.getItem(), ph.getQuantity())) ph.clear();
-		 * } } // ELSE NOTHING HAPPENS break; }
-		 * 
-		 * case SECONDARY: { if (!ph.isEmpty()) { if (slot.put(ph.getItem(), 1))
-		 * ph.remove(1); } else if (!slot.isEmpty()) { if (slot.getType() ==
-		 * SlotType.REGULAR || slot.getType() == SlotType.CRAFT_RESULT) { int q =
-		 * slot.getQuantity() / 2; ph.set(slot.getItem(), slot.getQuantity() - q);
-		 * slot.remove(slot.getQuantity() - q);
-		 * 
-		 * if (slot.getType() == SlotType.CRAFT_RESULT) craftResultPickedUpAction(); } }
-		 * break; }
-		 * 
-		 * default: break; }
-		 * 
-		 * model.craftingTable.update();
-		 */
+		
+		// Reset
+		slotMouseEntered(slot, event);
 	}
 
 	private void craftResultPickedUpAction() {

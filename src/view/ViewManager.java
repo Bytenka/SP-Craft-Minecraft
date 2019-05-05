@@ -36,7 +36,7 @@ public class ViewManager {
 
 		// Setting up the background
 		Image img = Model.BACKGROUND_IMAGE;
-		ImagePattern bimg = new ImagePattern(img, 0, 0, img.getWidth(), img.getHeight(), false);
+		ImagePattern bimg = new ImagePattern(img, 0, 0, 1, 1, true);
 		craftingScene.setFill(bimg);
 
 		CraftingUI craftingUI = new CraftingUI(model);

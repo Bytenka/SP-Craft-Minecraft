@@ -44,6 +44,7 @@ public class Inventory extends SlotsTable {
 		this.autoPutSlot(ItemDB.getItem("blaze_rod"), 9);
 		this.autoPutSlot(ItemDB.getItem("cobblestone_block"), 200);
 		this.autoPutSlot(ItemDB.getItem("diamond"), 84);
+		this.autoPutSlot(ItemDB.getItem("stone_block"), 32);
 		// -------------------- //
 
 	}

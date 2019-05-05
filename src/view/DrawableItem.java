@@ -23,7 +23,7 @@ public class DrawableItem extends Group {
 		quantityText.setWrappingWidth(Slot.SIZE - 6);
 		quantityText.setMouseTransparent(true);
 		quantityText.setFont(Model.FONT);
-		quantityText.setFill(Color.rgb(230, 230, 230));
+		quantityText.setId("quantityTextItem");
 		this.getChildren().add(quantityText);
 
 		this.clear();

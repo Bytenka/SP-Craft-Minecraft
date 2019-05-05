@@ -60,6 +60,24 @@
 				["emerald_block"]
 			]
 		},
+		"dye_powder_blue": {
+			"quantity": 9,
+			"recipe": [
+				["lapis_block"]
+			]
+		},
+		"melon": {
+			"quantity": 9,
+			"recipe": [
+				["melon_block"]
+			]
+		},
+		"slimeball": {
+			"quantity": 9,
+			"recipe": [
+				["slime_block"]
+			]
+		},
 		"coal": {
 			"quantity": 9,
 			"recipe": [
@@ -76,6 +94,12 @@
 			"quantity": 4,
 			"recipe": [
 				["glowstone_block"]
+			]
+		},
+		"sugar": {
+			"quantity": 1,
+			"recipe": [
+				["sugar_cane"]
 			]
 		},
 	},
@@ -102,12 +126,39 @@
 				["stick"]
 			]
 		},
-		
+		"redstone_torch": {
+			"quantity": 1,
+			"recipe": [
+				["redstone_dust"],
+				["stick"]
+			]
+		},
 		"stick": {
 			"quantity": 4,
 			"recipe": [
 				["planks_block"],
 				["planks_block"]
+			]
+		},
+		"minecart_furnace": {
+			"quantity": 1,
+			"recipe": [
+				["furnace_block"],
+				["minecart_normal"]
+			]
+		},
+		"minecart_tnt": {
+			"quantity": 1,
+			"recipe": [
+				["tnt_block"],
+				["minecart_normal"]
+			]
+		},
+		"quartz_block_lines": {
+			"quantity": 2,
+			"recipe": [
+				["quartz_block"],
+				["quartz_block"]
 			]
 		},
 	},
@@ -135,6 +186,36 @@
 			"quantity": 1,
 			"recipe": [
 				["shears", "pumpkin_block"]
+			]
+		},
+		"andesite_block": {
+			"quantity": 2,
+			"recipe": [
+				["diorite_block", "cobblestone_block"]
+			]
+		},
+		"granite_block": {
+			"quantity": 1,
+			"recipe": [
+				["diorite_block", "quartz"]
+			]
+		},
+		"dye_powder_cyan": {
+			"quantity": 2,
+			"recipe": [
+				["dye_powder_green", "dye_powder_blue"]
+			]
+		},
+		"dye_powder_purple": {
+			"quantity": 2,
+			"recipe": [
+				["dye_powder_red", "dye_powder_blue"]
+			]
+		},
+		"dye_powder_gray": {
+			"quantity": 2,
+			"recipe": [
+				["dye_powder_black", "bone_meal"]
 			]
 		},
 	},
@@ -188,6 +269,46 @@
 				["stick"]
 			]
 		},
+		"wood_sword": {
+			"quantity": 1,
+			"recipe": [
+				["planks_block"],
+				["planks_block"],
+				["stick"]
+			]
+		},
+		"stone_sword": {
+			"quantity": 1,
+			"recipe": [
+				["cobblestone_block"],
+				["cobblestone_block"],
+				["stick"]
+			]
+		},
+		"iron_sword": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot"],
+				["iron_ingot"],
+				["stick"]
+			]
+		},
+		"gold_sword": {
+			"quantity": 1,
+			"recipe": [
+				["gold_ingot"],
+				["gold_ingot"],
+				["stick"]
+			]
+		},
+		"diamond_sword": {
+			"quantity": 1,
+			"recipe": [
+				["diamond"],
+				["diamond"],
+				["stick"]
+			]
+		},
 		
 	},
 	
@@ -202,6 +323,12 @@
 			"quantity": 8,
 			"recipe": [
 				["wheat", "cocoa_beans", "wheat"]
+			]
+		},
+		"paper": {
+			"quantity": 3,
+			"recipe": [
+				["sugar_cane", "sugar_cane", "sugar_cane"]
 			]
 		}
 	},
@@ -270,6 +397,97 @@
 				["stone_block", "stone_block"]
 			]
 		},
+		"andesite_block_smooth": {
+			"quantity": 4,
+			"recipe": [
+				["andesite_block", "andesite_block"],
+				["andesite_block", "andesite_block"]
+			]
+		},
+		"granite_block_smooth": {
+			"quantity": 4,
+			"recipe": [
+				["granite_block", "granite_block"],
+				["granite_block", "granite_block"]
+			]
+		},
+		"carrot_on_a_stick": {
+			"quantity": 1,
+			"recipe": [
+				["fishing_rod", ""],
+				["", "carrot"]
+			]
+		},
+		"clay_block": {
+			"quantity": 1,
+			"recipe": [
+				["clay_ball", "clay_ball"],
+				["clay_ball", "clay_ball"]
+			]
+		},
+		"diorite_block": {
+			"quantity": 2,
+			"recipe": [
+				["cobblestone_block", "quartz"],
+				["quartz", "cobblestone_block"]
+			]
+		},
+		"diorite_block_smooth": {
+			"quantity": 4,
+			"recipe": [
+				["diorite_block", "diorite_block"],
+				["diorite_block", "diorite_block"]
+			]
+		},
+		"end_bricks_block": {
+			"quantity": 4,
+			"recipe": [
+				["end_stone_block", "end_stone_block"],
+				["end_stone_block", "end_stone_block"]
+			]
+		},
+		"nether_brick_block": {
+			"quantity": 1,
+			"recipe": [
+				["netherbrick", "netherbrick"],
+				["netherbrick", "netherbrick"]
+			]
+		},
+		"red_nether_brick_block": {
+			"quantity": 1,
+			"recipe": [
+				["nether_wart", "netherbrick"],
+				["netherbrick", "nether_wart"]
+			]
+		},
+		"pumpkin_pie": {
+			"quantity": 1,
+			"recipe": [
+				["pumpkin_block", "sugar"],
+				["", "egg"]
+			]
+		},
+		"purpur_block": {
+			"quantity": 4,
+			"recipe": [
+				["chorus_fruit_popped", "chorus_fruit_popped"],
+				["chorus_fruit_popped", "chorus_fruit_popped"]
+			]
+		},
+		"quartz_block": {
+			"quantity": 1,
+			"recipe": [
+				["quartz", "quartz"],
+				["quartz", "quartz"]
+			]
+		},
+		"snow_block": {
+			"quantity": 1,
+			"recipe": [
+				["snowball", "snowball"],
+				["snowball", "snowball"]
+			]
+		},
 	},
 	
 	"23": {
@@ -318,6 +536,14 @@
 			"recipe": [
 				["diamond", "diamond"],
 				["diamond", "stick"],
+				["", "stick"]
+			]
+		},
+		"wood_hoe": {
+			"quantity": 1,
+			"recipe": [
+				["planks_block", "planks_block"],
+				["", "stick"],
 				["", "stick"]
 			]
 		},
@@ -463,6 +689,13 @@
 				["planks_block", "planks_block", "planks_block"]
 			]
 		},
+		"repeater": {
+			"quantity": 1,
+			"recipe": [
+				["redstone_torch", "redstone_dust", "redstone_torch"],
+				["stone_block", "stone_block", "stone_block"]
+			]
+		},
 	},
 	
 	"33": {
@@ -568,6 +801,14 @@
 				["diamond", "diamond", "diamond"],
 				["diamond", "", "diamond"],
 				["diamond", "", "diamond"]
+			]
+		},
+		"iron_horse_armor": {
+			"quantity": 1,
+			"recipe": [
+				["iron_ingot", "", "iron_ingot"],
+				["iron_ingot", "iron_ingot", "iron_ingot"],
+				["iron_ingot", "", "iron_ingot"]
 			]
 		},
 		"gold_horse_armor": {
@@ -722,6 +963,14 @@
 				["diamond", "diamond", "diamond"]
 			]
 		},
+		"melon_block": {
+			"quantity": 1,
+			"recipe": [
+				["melon", "melon", "melon"],
+				["melon", "melon", "melon"],
+				["melon", "melon", "melon"]
+			]
+		},
 		"redstone_block": {
 			"quantity": 1,
 			"recipe": [
@@ -730,12 +979,36 @@
 				["redstone_dust", "redstone_dust", "redstone_dust"]
 			]
 		},
+		"nether_wart_block": {
+			"quantity": 1,
+			"recipe": [
+				["nether_wart", "nether_wart", "nether_wart"],
+				["nether_wart", "nether_wart", "nether_wart"],
+				["nether_wart", "nether_wart", "nether_wart"]
+			]
+		},
 		"emerald_block": {
 			"quantity": 1,
 			"recipe": [
 				["emerald", "emerald", "emerald"],
 				["emerald", "emerald", "emerald"],
 				["emerald", "emerald", "emerald"]
+			]
+		},
+		"slime_block": {
+			"quantity": 1,
+			"recipe": [
+				["slimeball", "slimeball", "slimeball"],
+				["slimeball", "slimeball", "slimeball"],
+				["slimeball", "slimeball", "slimeball"]
+			]
+		},
+		"lapis_block": {
+			"quantity": 1,
+			"recipe": [
+				["dye_powder_blue", "dye_powder_blue", "dye_powder_blue"],
+				["dye_powder_blue", "dye_powder_blue", "dye_powder_blue"],
+				["dye_powder_blue", "dye_powder_blue", "dye_powder_blue"]
 			]
 		},
 		"hay_block": {
@@ -792,6 +1065,198 @@
 				["gunpowder", "sand_block", "gunpowder"],
 				["sand_block", "gunpowder", "sand_block"],
 				["gunpowder", "sand_block", "gunpowder"]
+			]
+		},
+		"beetroot_soup": {
+			"quantity": 1,
+			"recipe": [
+				["beetroot", "beetroot", "beetroot"],
+				["beetroot", "beetroot", "beetroot"],
+				["", "bowl", ""]
+			]
+		},
+		"bone_block": {
+			"quantity": 1,
+			"recipe": [
+				["bone_meal", "bone_meal", "bone_meal"],
+				["bone_meal", "bone_meal", "bone_meal"],
+				["bone_meal", "bone_meal", "bone_meal"]
+			]
+		},
+		"comparator": {
+			"quantity": 1,
+			"recipe": [
+				["", "redstone_torch", ""],
+				["redstone_torch", "quartz", "redstone_torch"],
+				["stone_block", "stone_block", "stone_block"]
+			]
+		},
+		"glass_block_black": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_black", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_blue": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_blue", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_brown": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "cocoa_beans", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_cyan": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_cyan", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_gray": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_gray", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_green": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_green", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_light_blue": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_light_blue", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_lime": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_lime", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_magenta": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_magenta", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_orange": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_orange", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_pink": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_pink", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_purple": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_purple", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_red": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_red", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_silver": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_silver", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_yellow": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "dye_powder_yellow", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"glass_block_white": {
+			"quantity": 8,
+			"recipe": [
+				["glass_block", "glass_block", "glass_block"],
+				["glass_block", "bone_meal", "glass_block"],
+				["glass_block", "glass_block", "glass_block"]
+			]
+		},
+		"melon_speckled": {
+			"quantity": 1,
+			"recipe": [
+				["gold_nugget", "gold_nugget", "gold_nugget"],
+				["gold_nugget", "melon", "gold_nugget"],
+				["gold_nugget", "gold_nugget", "gold_nugget"]
+			]
+		},
+		"observer_block": {
+			"quantity": 1,
+			"recipe": [
+				["cobblestone_block", "cobblestone_block", "cobblestone_block"],
+				["redstone_dust", "redstone_dust", "quartz"],
+				["cobblestone_block", "cobblestone_block", "cobblestone_block"]
+			]
+		},
+		"prismarine_bricks_block": {
+			"quantity": 1,
+			"recipe": [
+				["prismarine_shard", "prismarine_shard", "prismarine_shard"],
+				["prismarine_shard", "prismarine_shard", "prismarine_shard"],
+				["prismarine_shard", "prismarine_shard", "prismarine_shard"]
+			]
+		},
+		"prismarine_dark_block": {
+			"quantity": 1,
+			"recipe": [
+				["prismarine_shard", "prismarine_shard", "prismarine_shard"],
+				["prismarine_shard", "dye_powder_black", "prismarine_shard"],
+				["prismarine_shard", "prismarine_shard", "prismarine_shard"]
+			]
+		},
+		"spectral_arrow": {
+			"quantity": 2,
+			"recipe": [
+				["", "glowstone_dust", ""],
+				["glowstone_dust", "arrow", "glowstone_dust"],
+				["", "glowstone_dust", ""]
 			]
 		},
 	}

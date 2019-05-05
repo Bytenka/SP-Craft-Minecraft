@@ -3,10 +3,7 @@ package view;
 import java.util.TreeSet;
 
 import controller.Controller;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextField;
@@ -30,9 +27,12 @@ public class ItemListUI extends Pane {
 	private SlotsTable slots;
 	private BackgroundUI background;
 	private TextField searchBar;
+	
+	Controller controller;
 
 	public ItemListUI(Controller controller) {
 		super();
+		this.controller = controller;
 		nbRows = ItemDB.getItems().size() / DISPLAY_COLS + 1;
 		scrollPane = new ScrollPane();
 		background = new BackgroundUI();
